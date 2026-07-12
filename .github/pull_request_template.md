@@ -1,9 +1,15 @@
 ## Outcome
 
 ## Trace
+- Outcome:
+- Opportunity:
+- Bet:
+- Milestone:
 - Requirement:
 - Spec:
 - Ticket:
+- Change request (when scope changed):
+- Review:
 
 ## Risk and approval
 - Risk tier:
@@ -11,6 +17,7 @@
 
 ## Verification
 - [ ] `make verify`
+- [ ] `make product`
 - [ ] User/domain outcome reviewed when applicable
 
 ## Completion

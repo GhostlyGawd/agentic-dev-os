@@ -5,6 +5,10 @@
     {"metric":"METRIC-002","title":"First-pass success","threshold":0.80},
     {"metric":"METRIC-003","title":"Human intervention rate"},
     {"metric":"METRIC-004","title":"Event completeness","threshold":0.95},
-    {"metric":"METRIC-005","title":"Architecture violations","threshold":0}
+    {"metric":"METRIC-005","title":"Architecture violations","threshold":0},
+    {"metric":"METRIC-012","title":"Product-chain coverage","threshold":1.0},
+    {"metric":"METRIC-013","title":"Opportunity evidence","threshold":1.0},
+    {"metric":"METRIC-014","title":"Validated bets","threshold":1.0},
+    {"metric":"METRIC-015","title":"Milestone reviews","threshold":1.0}
   ]
 }

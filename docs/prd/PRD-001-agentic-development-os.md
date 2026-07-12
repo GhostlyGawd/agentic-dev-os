@@ -5,6 +5,15 @@
 - Owner: Platform
 - Status: Accepted
 
+## Parent Bet
+- BET-001
+
+## Originating Outcome
+- O-001
+
+## Originating Opportunity
+- OP-001
+
 ## Problem
 AI-assisted delivery becomes unreliable when product intent, execution scope, architecture, verification, operational evidence, and user outcomes drift apart.
 
@@ -38,8 +47,8 @@ Autonomous production operation, vendor-specific publishing, or replacement of p
 - PRD-001-R18: Prove success with positive, negative, and end-to-end automated verification.
 
 ## Success Metrics
-- METRIC-001 through METRIC-011 meet thresholds defined in `docs/metrics/catalog.md`.
-- All 82 master compliance records are complete.
+- METRIC-001 through METRIC-015 meet thresholds defined in `docs/metrics/catalog.md`.
+- All 100 master compliance records are complete.
 - `make verify` and `make demo` pass from a clean checkout using Python 3.11+.
 
 ## Constraints

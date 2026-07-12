@@ -10,4 +10,9 @@ gates:
   - completion_evidence
   - user_outcome_review
   - master_compliance
+  - product_chain
+  - validated_bet
+  - change_request
+  - milestone_review
+  - generated_view_drift
 failure_policy: block

@@ -7,6 +7,15 @@
 - Owner: <name/team>
 - Status: Draft
 
+## Parent Bet
+- BET-NNN
+
+## Originating Outcome
+- O-NNN
+
+## Originating Opportunity
+- OP-NNN
+
 ## Problem
 ## Users
 ## User Stories

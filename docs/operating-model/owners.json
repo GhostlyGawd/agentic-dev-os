@@ -9,5 +9,9 @@
     "ci":{"role":"CI owner","accountable":"developer-experience"},
     "loops":{"role":"Loop executor","accountable":"delivery"},
     "risk_review":{"role":"Exception reviewer","accountable":"security"}
+    ,"product_strategy":{"role":"Product strategy owner","accountable":"product"}
+    ,"discovery":{"role":"Discovery owner","accountable":"research"}
+    ,"bets":{"role":"Bet owner","accountable":"product"}
+    ,"product_review":{"role":"Milestone review owner","accountable":"product"}
   }
 }

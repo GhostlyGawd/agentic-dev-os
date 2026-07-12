@@ -1,5 +1,5 @@
 {
-  "schema_version":"1.0","expected_count":82,
+  "schema_version":"1.1","expected_count":100,
   "requirements":[
     {"id":"MASTER-001","requirement":"Purpose persists intent, constraints, links, telemetry, and history","implementation_refs":["MASTER.md","docs/prd/PRD-001-agentic-development-os.md"],"test_ref":"MASTER-TEST-001","status":"Complete"},
     {"id":"MASTER-002","requirement":"System supports multiple bounded features, modules, and loops","implementation_refs":["src/agentic_os/governance.py"],"test_ref":"MASTER-TEST-002","status":"Complete"},
@@ -82,6 +82,24 @@
     {"id":"MASTER-079","requirement":"Growth metrics and funnel conversions are executable","implementation_refs":["src/agentic_os/growth.py"],"test_ref":"MASTER-TEST-007","status":"Complete"},
     {"id":"MASTER-080","requirement":"Growth risks and failure modes are defined","implementation_refs":["docs/growth/strategy.md"],"test_ref":"MASTER-TEST-007","status":"Complete"},
     {"id":"MASTER-081","requirement":"Growth operating model and weekly cadence exist","implementation_refs":["docs/growth/operating-system.md","docs/growth/templates/weekly-review.md"],"test_ref":"MASTER-TEST-007","status":"Complete"},
-    {"id":"MASTER-082","requirement":"All growth templates are copy ready","implementation_refs":["docs/growth/templates/content-brief.md","docs/growth/templates/launch-post.md","docs/growth/templates/experiment.md","docs/growth/templates/community-post.md"],"test_ref":"MASTER-TEST-007","status":"Complete"}
+    {"id":"MASTER-082","requirement":"All growth templates are copy ready","implementation_refs":["docs/growth/templates/content-brief.md","docs/growth/templates/launch-post.md","docs/growth/templates/experiment.md","docs/growth/templates/community-post.md"],"test_ref":"MASTER-TEST-007","status":"Complete"},
+    {"id":"MASTER-083","requirement":"AI product layer has explicit canonical boundaries","implementation_refs":[".ai/README.md",".ai/operating-rules.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-084","requirement":"Project context captures brief glossary stakeholders and constraints","implementation_refs":[".ai/context/project-brief.md",".ai/context/glossary.md",".ai/context/stakeholders.md",".ai/context/constraints.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-085","requirement":"North star product brief and PRFAQ frame customer value","implementation_refs":[".ai/strategy/north-star.md",".ai/strategy/product-brief.md",".ai/strategy/product-prfaq.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-086","requirement":"Outcomes require metric baseline target horizon and guardrails","implementation_refs":[".ai/strategy/desired-outcomes.md","src/agentic_os/product.py"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-087","requirement":"Roadmap and scorecard remain outcome oriented","implementation_refs":[".ai/strategy/roadmap.md",".ai/strategy/outcome-scorecard.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-088","requirement":"Discovery records opportunities customer problems and evidence","implementation_refs":[".ai/discovery/opportunity-tree.md",".ai/discovery/customer-problems.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-089","requirement":"Discovery records assumptions research and experiments","implementation_refs":[".ai/discovery/assumptions.md",".ai/discovery/research-notes.md",".ai/discovery/experiments/EXP-001.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-090","requirement":"Bets link upstream evidence and define success kill and advance criteria","implementation_refs":[".ai/bets/BET-001-product-strategy-layer.md","src/agentic_os/product.py"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-091","requirement":"WBS and milestones link bets PRDs exits and reviews","implementation_refs":[".ai/wbs.md",".ai/milestones/M-001.md",".ai/milestones/M-002.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-092","requirement":"PRDs require validated bet outcome and opportunity","implementation_refs":["docs/prd/TEMPLATE.md","src/agentic_os/product.py"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-093","requirement":"Change requests govern new scope","implementation_refs":["docs/change-requests/TEMPLATE.md","docs/change-requests/CR-001-product-strategy-integration.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-094","requirement":"Milestone and release reviews preserve human outcome validation","implementation_refs":["docs/review/qa-checklist.md","docs/review/milestone-review-template.md","docs/review/release-readiness.md","docs/review/review-logs/REVIEW-002-product-integration.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-095","requirement":"Memory preserves conventions implementation notes and pitfalls","implementation_refs":[".ai/memory/conventions.md",".ai/memory/implementation-notes.md",".ai/memory/pitfalls.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-096","requirement":"Portable commands cover orientation through closure","implementation_refs":[".ai/commands/orient.md",".ai/commands/discover.md",".ai/commands/bet.md",".ai/commands/specify.md",".ai/commands/plan.md",".ai/commands/build.md",".ai/commands/review.md",".ai/commands/close.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-097","requirement":"Trace extends from outcome through human review","implementation_refs":["docs/trace/traceability.json","src/agentic_os/product.py"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-098","requirement":"Requirements acceptance and CSV trace are generated noncanonical views","implementation_refs":[".ai/requirements/requirements.md",".ai/requirements/acceptance-criteria.md",".ai/requirements/traceability.csv"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-099","requirement":"Product lifecycle telemetry and chain metrics are integrated","implementation_refs":["src/agentic_os/telemetry.py","src/agentic_os/product.py","docs/metrics/catalog.md"],"test_ref":"MASTER-TEST-013","status":"Complete"},
+    {"id":"MASTER-100","requirement":"Product chain negative and end to end CI proof is automated","implementation_refs":["tests/test_product.py",".github/workflows/governance.yml"],"test_ref":"MASTER-TEST-013","status":"Complete"}
   ]
 }

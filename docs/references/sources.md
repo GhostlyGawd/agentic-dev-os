@@ -20,3 +20,11 @@ The operating model was informed by the master document and these supplied refer
 - [daily.dev: Zero-Budget DevTool Marketing](https://business.daily.dev/resources/dev-tool-marketing-zero-budget-bootstrapped-founders-playbook/)
 - [DX Tips: DevTools SEO Content Engine](https://dx.tips/seo-content-engine)
 - [DEV Community: SEO for DevTools](https://dev.to/pavel_buyeu/seo-for-devtools-ranking-when-your-audience-lives-on-github-not-google-13od)
+
+## Product strategy and discovery
+
+- [Productboard: Product Brief](https://www.productboard.com/glossary/product-brief/)
+- [Aha!: Product Requirements Documents](https://www.aha.io/roadmapping/guide/requirements-management/what-is-a-prd-(product-requirements-document))
+- [Working Backwards: PR/FAQ](https://workingbackwards.com/resources/working-backwards-pr-faq/)
+- [Opportunity Solution Tree](https://productinterview.com/frameworks/opportunity-solution-tree/)
+- [PMI: Work Breakdown Structure Principles](https://www.pmi.org/learning/library/work-breakdown-structure-basic-principles-4883)

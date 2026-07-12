@@ -16,6 +16,10 @@ EVENT_NAMES = {
     "approval.revoked", "trace.updated", "metric.summary", "alert.triggered",
     "artifact.archived", "reversal.completed", "finding.recorded", "guardrail.created",
     "growth.experiment_started", "growth.experiment_completed", "growth.conversion_recorded",
+    "outcome.created", "outcome.updated", "opportunity.created", "opportunity.updated",
+    "experiment.started", "experiment.completed", "bet.created", "bet.status_changed",
+    "milestone.created", "milestone.reviewed", "change_request.created", "change_request.decided",
+    "product_review.completed", "product_export.completed",
 }
 OUTCOMES = {"success", "failure", "handoff", "passed", "failed", "approved", "rejected", "cancelled"}
 SENSITIVE = re.compile(r"token|secret|password|credential|authorization", re.IGNORECASE)

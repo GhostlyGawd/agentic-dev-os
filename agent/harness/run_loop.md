@@ -3,6 +3,7 @@
 ## Preconditions
 
 - One valid ticket with linked PRD and spec.
+- A valid outcome → opportunity → validated bet → PRD product chain.
 - Explicit `Files Allowed`, acceptance criteria, verification, owner, and risk tier.
 - Human approval when required by the risk tier.
 

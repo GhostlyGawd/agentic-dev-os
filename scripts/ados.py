@@ -15,6 +15,7 @@ from agentic_os.config import load_config,load_json,write_json
 from agentic_os.governance import LoopManager, archive_ticket, check_scope, grant_approval
 from agentic_os.growth import record_conversion, write_growth_report
 from agentic_os.metrics import evaluate_alerts, render_dashboard, render_report, summarize
+from agentic_os.product import export_product_views,product_metrics,validate_product
 from agentic_os.telemetry import append_event, build_event, read_events
 from agentic_os.validation import stale_artifacts, trace_coverage, validate_repository
 
@@ -97,7 +98,7 @@ def scope(args):
 
 
 def metrics(_):
-    events=read_events(ROOT/load_config(ROOT)["event_file"]); summary=summarize(events,trace_coverage(ROOT)); alerts=evaluate_alerts(ROOT,summary)
+    events=read_events(ROOT/load_config(ROOT)["event_file"]); summary=summarize(events,trace_coverage(ROOT)); summary.update(product_metrics(ROOT)); alerts=evaluate_alerts(ROOT,summary)
     (ROOT/"docs/metrics/latest.md").write_text(render_report(summary,alerts),encoding="utf-8"); dashboard=render_dashboard(ROOT,summary,alerts)
     for alert in alerts: append_event(ROOT/load_config(ROOT)["event_file"],build_event("alert.triggered",f"alert-{uuid.uuid4()}","SYSTEM","metrics",metadata=alert))
     print(f"docs/metrics/latest.md\n{dashboard.relative_to(ROOT)}"); return 0
@@ -126,6 +127,36 @@ def growth(args):
     return 0
 
 
+def product(args):
+    if args.product_action=="validate":
+        issues=validate_product(ROOT)
+        if issues:
+            for issue in issues: print(f"ERROR PRODUCT_CHAIN: {issue}")
+            return 1
+        print("Product strategy and delivery chain is valid."); return 0
+    if args.product_action=="export":
+        drift=export_product_views(ROOT,check=args.check)
+        if drift:
+            print("Generated view drift: "+", ".join(drift)); return 1
+        if not args.check:
+            append_event(ROOT/load_config(ROOT)["event_file"],build_event("product_export.completed",f"product-export-{uuid.uuid4()}","SYSTEM",args.actor,outcome="success",metadata={"paths":[".ai/requirements/requirements.md",".ai/requirements/acceptance-criteria.md",".ai/requirements/traceability.csv"]}))
+            print("Product compatibility views generated.")
+        else: print("Generated product views are current.")
+        return 0
+    if args.product_action=="metrics":
+        print(json.dumps(product_metrics(ROOT),indent=2,sort_keys=True)); return 0
+    if args.product_action=="gate":
+        path_matches=list((ROOT/"docs/prd").glob(f"{args.prd}-*.md"))
+        if len(path_matches)!=1: raise ValueError("PRD did not resolve uniquely")
+        issues=validate_product(ROOT)
+        relevant=[issue for issue in issues if args.prd in issue or "bet" in issue or "outcome" in issue or "opportunity" in issue]
+        if relevant:
+            for issue in relevant: print(f"BLOCKED: {issue}")
+            return 1
+        print(f"{args.prd} passed the product gate."); return 0
+    raise ValueError("unknown product action")
+
+
 def demo(_):
     event_path=ROOT/load_config(ROOT)["event_file"]; event_path.unlink(missing_ok=True)
     run="demo-"+uuid.uuid4().hex[:10]
@@ -145,6 +176,7 @@ def parser():
     au=sub.add_parser("audit-stale"); au.set_defaults(func=audit)
     i=sub.add_parser("impacted-tests"); i.add_argument("files",nargs="+"); i.set_defaults(func=impacted)
     g=sub.add_parser("growth"); g.add_argument("growth_action",choices=("record","report")); g.add_argument("--experiment",default="GROWTH-001"); g.add_argument("--channel",default="direct"); g.add_argument("--stage",choices=("visitor","demo","trial","adopted","retained","advocate"),default="visitor"); g.add_argument("--count",type=int,default=1); g.set_defaults(func=growth)
+    pr=sub.add_parser("product"); pr.add_argument("product_action",choices=("validate","export","metrics","gate")); pr.add_argument("--check",action="store_true"); pr.add_argument("--prd",default="PRD-002"); pr.add_argument("--actor",default=os.getenv("USER","agent")); pr.set_defaults(func=product)
     e=sub.add_parser("emit"); e.add_argument("--event",required=True); e.add_argument("--ticket",default="SYSTEM"); e.add_argument("--run-id"); e.add_argument("--actor",default=os.getenv("USER","agent")); e.add_argument("--outcome",choices=("success","failure","handoff","passed","failed","approved","rejected","cancelled")); e.add_argument("--metadata",default="{}"); e.set_defaults(func=emit)
     tq=sub.add_parser("trace-query"); tq.add_argument("--id",required=True); tq.set_defaults(func=trace_query)
     st=sub.add_parser("status"); st.add_argument("kind",choices=("prd","spec","ticket")); st.add_argument("--id",required=True); st.add_argument("--status",required=True); st.add_argument("--actor",default=os.getenv("USER","agent")); st.set_defaults(func=set_status)
