@@ -7,4 +7,6 @@ dist/
 build/
 observability/events/*.jsonl
 !observability/events/.gitkeep
+observability/events/active-runs.json
+docs/growth/data/events.jsonl
 docs/metrics/latest.md

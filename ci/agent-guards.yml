@@ -1,0 +1,13 @@
+version: 1
+gates:
+  - stable_ids
+  - prd_spec_ticket_trace_sync
+  - ticket_scope
+  - risk_approval
+  - architecture_boundaries
+  - tool_naming
+  - event_schema
+  - completion_evidence
+  - user_outcome_review
+  - master_compliance
+failure_policy: block

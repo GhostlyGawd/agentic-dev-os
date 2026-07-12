@@ -1,0 +1,13 @@
+{
+  "schema_version":"1.0",
+  "owners":{
+    "prd":{"role":"Product owner","accountable":"product"},
+    "spec":{"role":"Spec owner","accountable":"architecture"},
+    "modules":{"role":"Module owner","accountable":"platform"},
+    "traceability":{"role":"Trace steward","accountable":"quality"},
+    "metrics":{"role":"Metrics owner","accountable":"operations"},
+    "ci":{"role":"CI owner","accountable":"developer-experience"},
+    "loops":{"role":"Loop executor","accountable":"delivery"},
+    "risk_review":{"role":"Exception reviewer","accountable":"security"}
+  }
+}
