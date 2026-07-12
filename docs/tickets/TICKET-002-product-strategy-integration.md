@@ -49,6 +49,7 @@ Product artifacts, validators, exports, CLI, metrics, telemetry, CI, documentati
 - ci/
 - docs/
 - observability/
+- pyproject.toml
 - scripts/
 - src/
 - tests/
