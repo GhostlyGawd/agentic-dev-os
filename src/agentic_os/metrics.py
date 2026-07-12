@@ -61,6 +61,11 @@ def render_report(summary: dict[str, float | int], alerts: list[dict[str, Any]])
         "spec_adherence_rate":"Spec adherence", "traceability_coverage":"Traceability coverage",
         "regression_rate":"Regression rate", "architecture_violation_count":"Architecture violations",
         "event_completeness_rate":"Event completeness",
+        "product_chain_coverage":"Product-chain coverage",
+        "opportunity_evidence_coverage":"Opportunity evidence coverage",
+        "validated_bet_rate":"Validated bet rate",
+        "milestone_review_coverage":"Milestone review coverage",
+        "product_outcome_count":"Product outcomes",
     }
     rows=[]
     for key, label in labels.items():

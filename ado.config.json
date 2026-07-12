@@ -10,7 +10,11 @@
     "first_pass_success_rate": {"minimum": 0.80},
     "event_completeness_rate": {"minimum": 0.95},
     "architecture_violation_count": {"maximum": 0},
-    "regression_rate": {"maximum": 0.05}
+    "regression_rate": {"maximum": 0.05},
+    "product_chain_coverage": {"minimum": 1.0},
+    "opportunity_evidence_coverage": {"minimum": 1.0},
+    "validated_bet_rate": {"minimum": 1.0},
+    "milestone_review_coverage": {"minimum": 1.0}
   },
   "sensitive_key_patterns": ["token", "secret", "password", "credential", "authorization"],
   "owners_file": "docs/operating-model/owners.json",

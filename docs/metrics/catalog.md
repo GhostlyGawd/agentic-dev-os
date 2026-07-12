@@ -13,5 +13,9 @@
 | METRIC-009 | Regression rate | regressed stopped runs / stopped runs | <= 5% |
 | METRIC-010 | Architecture violations | recorded boundary violations | 0 |
 | METRIC-011 | Event completeness | runs with start, verification, stop, and summary / starts | >= 95% |
+| METRIC-012 | Product-chain coverage | PRDs linked to valid bet, opportunity, and outcome / active PRDs | 100% |
+| METRIC-013 | Opportunity evidence coverage | opportunities with recorded evidence / opportunities | 100% |
+| METRIC-014 | Validated bet rate | bets with success, kill, and advance criteria / bets | 100% |
+| METRIC-015 | Milestone review coverage | completed milestones with human review / completed milestones | 100% |
 
 Interpret metrics together. High retry depth signals ambiguous work; high intervention signals weak self-sufficiency; low trace coverage signals broken intent; architecture violations signal unenforced boundaries; and lead-time growth signals excessive harness friction.

@@ -11,13 +11,14 @@ from .config import load_config, load_json
 from .governance import HEADINGS, section
 from .telemetry import read_events
 from .tooling import validate_tool_catalog
+from .product import export_product_views,validate_product
 
 REQUIREMENT=re.compile(r"\bPRD-\d{3,}-R\d{2,}\b")
 SPEC=re.compile(r"\bSPEC-\d{3,}-A\d{2,}\b")
 TICKET=re.compile(r"\bTICKET-\d{3,}\b")
 TEST=re.compile(r"\bTEST-\d{3,}\b")
 METRIC=re.compile(r"\bMETRIC-\d{3,}\b")
-TRACE_FIELDS={"requirement_id","requirement","source_origin","spec_ref","ticket_ref","code_ref","test_ref","telemetry_event","metric_ref","completion_note","status","version"}
+TRACE_FIELDS={"requirement_id","requirement","source_origin","outcome_ref","opportunity_ref","bet_ref","milestone_ref","change_request_ref","review_ref","spec_ref","ticket_ref","code_ref","test_ref","telemetry_event","metric_ref","completion_note","status","version"}
 
 
 @dataclass(frozen=True)
@@ -31,7 +32,7 @@ def issue_list(code:str,path:str,messages:list[str])->list[Issue]:
 
 
 def validate_structure(root:Path)->list[Issue]:
-    required=["README.md","MASTER.md","ado.config.json","agent/AGENTS.md","agent/policies/tool-naming.md",
+    required=["README.md","MASTER.md","ado.config.json",".ai/README.md",".ai/operating-rules.md","agent/AGENTS.md","agent/policies/tool-naming.md",
               "architecture.json","docs/prd","docs/specs","docs/tickets","docs/archive","docs/findings","docs/decisions",
               "docs/metrics","docs/growth","docs/operating-model/owners.json","docs/trace/traceability.json",
               "docs/trace/master-compliance.json","observability/schema/event.schema.json","observability/dashboards/default.json",
@@ -99,7 +100,7 @@ def validate_compliance(root:Path)->list[Issue]:
 
 
 def validate_owners(root:Path)->list[Issue]:
-    payload=load_json(root/"docs/operating-model/owners.json"); required={"prd","spec","modules","traceability","metrics","ci","loops","risk_review"}
+    payload=load_json(root/"docs/operating-model/owners.json"); required={"prd","spec","modules","traceability","metrics","ci","loops","risk_review","product_strategy","discovery","bets","product_review"}
     missing=required-set(payload.get("owners",{})); return [Issue("OWNER_MISSING",name,"docs/operating-model/owners.json") for name in sorted(missing)]
 
 
@@ -115,6 +116,8 @@ def validate_repository(root:Path)->list[Issue]:
     issues=validate_structure(root)
     if issues: return issues
     issues+=validate_tickets(root)+validate_trace(root)+validate_compliance(root)+validate_owners(root)
+    issues+=issue_list("PRODUCT_CHAIN",".ai",validate_product(root))
+    issues+=issue_list("GENERATED_DRIFT",".ai/requirements",export_product_views(root,check=True))
     issues+=issue_list("ARCHITECTURE","architecture.json",validate_architecture(root))
     issues+=issue_list("TOOL_NAMING","tools/catalog.json",validate_tool_catalog(root))
     try: read_events(root/load_config(root)["event_file"])

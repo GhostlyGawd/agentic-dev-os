@@ -17,6 +17,8 @@ jobs:
         with: {python-version: "3.11"}
       - name: Full governance, lint, architecture, trace, tool, and test gates
         run: make verify
+      - name: Verify generated product views
+        run: make product
       - name: Enforce ticket scope and risk approval
         if: github.event_name == 'pull_request'
         env:

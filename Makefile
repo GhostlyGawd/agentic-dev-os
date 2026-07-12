@@ -1,4 +1,4 @@
-.PHONY: help validate test lint verify demo metrics dashboard audit clean
+.PHONY: help validate product test lint verify demo metrics dashboard audit clean
 
 PYTHON ?= python3
 
@@ -7,6 +7,10 @@ help:
 
 validate:
 	@$(PYTHON) scripts/ados.py validate
+
+product:
+	@$(PYTHON) scripts/ados.py product validate
+	@$(PYTHON) scripts/ados.py product export --check
 
 test:
 	@$(PYTHON) -m unittest discover -s tests -v

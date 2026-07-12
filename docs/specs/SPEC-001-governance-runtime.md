@@ -14,15 +14,16 @@ A dependency-free CLI validates governed artifacts, writes structured events, ag
 
 ## Public Interfaces
 - `ados.py validate [--json]`
-- `ados.py loop-start --ticket ID`
-- `ados.py loop-retry --ticket ID --reason TEXT`
-- `ados.py loop-stop --ticket ID --outcome OUTCOME`
+- `ados.py loop start --ticket ID`
+- `ados.py loop retry --ticket ID --reason TEXT`
+- `ados.py loop stop --ticket ID --outcome OUTCOME`
 - `ados.py metrics`
-- `ados.py new-ticket --id ID --title TITLE`
+- `ados.py new ticket --id ID --title TITLE`
+- `ados.py product validate|export|metrics|gate`
 - `ados.py demo`
 
 ## Data Model
-Trace rows contain requirement, spec, ticket, code, test, metric, status, and version. Events contain schema version, event name, event ID, timestamp, run ID, ticket ID, actor, outcome, duration, intervention, cost, retry count, and metadata.
+Trace rows contain outcome, opportunity, bet, PRD requirement, spec, milestone, ticket, change request, code, test, event, metric, review, completion, status, and version. Events contain schema version, event name, event ID, timestamp, run ID, ticket ID, actor, outcome, duration, intervention, cost, retry count, and metadata.
 
 ## Acceptance Criteria
 - SPEC-001-A01: Invalid or missing trace targets fail validation.
