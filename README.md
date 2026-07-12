@@ -23,17 +23,17 @@ make verify
 make demo
 ```
 
-`make verify` checks tests, traceability, repository structure, ticket scope, architecture boundaries, and telemetry. `make demo` emits a sample loop lifecycle and writes a report to `docs/metrics/latest.md`.
+`make verify` checks all 82 master obligations, complete traceability, artifact contracts, tool naming, ownership, architecture, telemetry, real lint rules, and positive/negative tests. `make demo` exercises a complete loop and generates metrics, alerts, JSON evidence, and a static HTML dashboard.
 
 ## Daily workflow
 
 1. Copy a template from `docs/*/TEMPLATE.md`.
 2. Assign stable IDs: `PRD-NNN`, `SPEC-NNN`, `TICKET-NNN`, `TEST-NNN`, and `METRIC-NNN`.
 3. Add the relationship to `docs/trace/traceability.json`.
-4. Start the loop: `python scripts/ados.py loop-start --ticket TICKET-001`.
+4. Plan and start the loop: `python scripts/ados.py loop plan --ticket TICKET-001`, then `python scripts/ados.py loop start --ticket TICKET-001`.
 5. Make only the ticket's allowed changes.
-6. Run `make verify`.
-7. Finish the loop: `python scripts/ados.py loop-stop --ticket TICKET-001 --outcome success`.
+6. Record scoped actions and run `python scripts/ados.py loop verify --ticket TICKET-001`.
+7. Finish the loop: `python scripts/ados.py loop stop --ticket TICKET-001 --outcome success`.
 8. Update completion notes and the trace record status.
 
 ## Commands
@@ -44,14 +44,20 @@ make demo
 | `make test` | Run unit and architecture tests |
 | `make validate` | Validate artifacts, traces, scopes, and events |
 | `make demo` | Emit demo events and build a metric report |
-| `python scripts/ados.py new-ticket --id TICKET-002 --title "Example"` | Create a ticket from the template |
+| `python scripts/ados.py new ticket --id TICKET-002 --title "Example"` | Create a ticket and emit its lifecycle event |
 | `python scripts/ados.py metrics` | Rebuild the human-readable metric report |
+| `python scripts/ados.py trace-query --id PRD-001-R08` | Perform forward/backward impact analysis |
+| `python scripts/ados.py scope-check --ticket TICKET-001 FILE...` | Enforce the allowed-file boundary |
+| `python scripts/ados.py approve ...` | Bind an R2/R3 approval to the exact ticket digest |
+| `python scripts/ados.py archive --ticket TICKET-001` | Move completed work out of the active set |
+| `python scripts/ados.py growth record ...` | Record organic funnel progress |
 
 ## Repository map
 
 | Path | Contract |
 | --- | --- |
 | `docs/prd/` | Product intent and stable requirements |
+| `MASTER.md` | Controlling contract decomposed into 82 verified obligations |
 | `docs/specs/` | Architecture, interfaces, acceptance criteria, tests |
 | `docs/tickets/` | One bounded executable slice per file |
 | `docs/trace/` | Machine-readable requirement-to-outcome links |

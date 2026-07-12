@@ -7,6 +7,24 @@
     "scripts": {
       "may_import": ["src/agentic_os"],
       "owner": "developer-experience"
+    },
+    "tests": {
+      "may_import": ["src/agentic_os"],
+      "owner": "quality"
+    },
+    "ci": {
+      "may_import": ["src/agentic_os"],
+      "owner": "developer-experience"
     }
+  },
+  "local_import_roots": {
+    "agentic_os": "src/agentic_os",
+    "scripts": "scripts"
+  },
+  "rules": {
+    "cycles": "forbidden",
+    "cross_layer_imports": "declared_only",
+    "internal_api_imports": "same_module_only",
+    "hidden_shared_state": "forbidden"
   }
 }

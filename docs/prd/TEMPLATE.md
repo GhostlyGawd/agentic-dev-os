@@ -1,5 +1,7 @@
 # PRD: <Feature Name>
 
+## Overview
+
 ## Metadata
 - ID: PRD-NNN
 - Owner: <name/team>
@@ -7,6 +9,7 @@
 
 ## Problem
 ## Users
+## User Stories
 ## Goals
 ## Non-Goals
 ## Requirements

@@ -30,6 +30,19 @@ Trace rows contain requirement, spec, ticket, code, test, metric, status, and ve
 - SPEC-001-A03: Valid loop events append as JSON Lines.
 - SPEC-001-A04: Metric reports aggregate completed runs.
 - SPEC-001-A05: Architecture tests reject undeclared local imports.
+- SPEC-001-A06: Maintenance audits and archiving keep active work clean.
+- SPEC-001-A07: Impact mapping selects relevant verification.
+- SPEC-001-A08: All master metrics are calculated from events and traces.
+- SPEC-001-A09: All lifecycle and governance event types validate.
+- SPEC-001-A10: Reports, alerts, and a dashboard are generated.
+- SPEC-001-A11: Approvals, shadow mode, exception paths, and outcome reviews are enforced.
+- SPEC-001-A12: Tool catalogs enforce naming and parameter standards.
+- SPEC-001-A13: Operating roles are machine-readable and validated.
+- SPEC-001-A14: Every governed artifact has a reusable template.
+- SPEC-001-A15: CI runs master compliance, trace, architecture, tool, lint, and test gates.
+- SPEC-001-A16: Growth funnel events and reports are executable.
+- SPEC-001-A17: Every master obligation resolves to implementation and evidence.
+- SPEC-001-A18: Negative paths and an end-to-end demo prove enforcement.
 
 ## Test Plan
 TEST-001 covers traces; TEST-002 covers tickets; TEST-003 covers events and metrics; TEST-004 covers architecture.

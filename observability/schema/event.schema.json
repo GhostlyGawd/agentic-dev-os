@@ -1,22 +1,16 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Agentic OS Event",
-  "type": "object",
-  "required": ["schema_version", "event_name", "event_id", "timestamp", "run_id", "ticket_id", "actor"],
-  "properties": {
-    "schema_version": {"const": "1.0"},
-    "event_name": {"enum": ["loop.started", "loop.retried", "verification.completed", "loop.stopped", "human.intervened"]},
-    "event_id": {"type": "string"},
-    "timestamp": {"type": "string", "format": "date-time"},
-    "run_id": {"type": "string"},
-    "ticket_id": {"type": "string", "pattern": "^TICKET-[0-9]{3,}$"},
-    "actor": {"type": "string"},
-    "outcome": {"enum": ["success", "failure", "handoff", "passed", "failed"]},
-    "duration_ms": {"type": "integer", "minimum": 0},
-    "retry_count": {"type": "integer", "minimum": 0},
-    "human_intervention": {"type": "boolean"},
-    "cost_usd": {"type": "number", "minimum": 0},
-    "metadata": {"type": "object"}
-  },
-  "additionalProperties": false
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Agentic OS Event","type":"object",
+  "required":["schema_version","event_name","event_id","timestamp","run_id","ticket_id","actor"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "event_name":{"enum":["prd.created","prd.updated","prd.status_changed","spec.created","spec.updated","spec.status_changed","ticket.created","ticket.updated","ticket.status_changed","loop.planned","loop.started","loop.retried","loop.stopped","agent.action","verification.started","verification.completed","test.completed","ci.gate_completed","dependency.violation","human.reviewed","human.intervened","approval.granted","approval.revoked","trace.updated","metric.summary","alert.triggered","artifact.archived","reversal.completed","finding.recorded","guardrail.created","growth.experiment_started","growth.experiment_completed","growth.conversion_recorded"]},
+    "event_id":{"type":"string"},"timestamp":{"type":"string","format":"date-time"},"run_id":{"type":"string"},
+    "ticket_id":{"type":"string","pattern":"^(SYSTEM|TICKET-[0-9]{3,})$"},"actor":{"type":"string"},
+    "outcome":{"enum":["success","failure","handoff","passed","failed","approved","rejected","cancelled"]},
+    "duration_ms":{"type":"integer","minimum":0},"retry_count":{"type":"integer","minimum":0},
+    "cost_usd":{"type":"number","minimum":0},"human_intervention":{"type":"boolean"},"regression":{"type":"boolean"},
+    "tests_passed":{"type":"integer","minimum":0},"tests_failed":{"type":"integer","minimum":0},
+    "architecture_violations":{"type":"integer","minimum":0},"metadata":{"type":"object"}
+  },"additionalProperties":false
 }

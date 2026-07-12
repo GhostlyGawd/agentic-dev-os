@@ -1,4 +1,4 @@
-.PHONY: help validate test verify demo metrics clean
+.PHONY: help validate test lint verify demo metrics dashboard audit clean
 
 PYTHON ?= python3
 
@@ -11,7 +11,11 @@ validate:
 test:
 	@$(PYTHON) -m unittest discover -s tests -v
 
-verify: validate test
+lint:
+	@$(PYTHON) -m compileall -q src scripts ci tests
+	@$(PYTHON) ci/lint.py
+
+verify: lint validate test
 	@echo "All governance gates passed."
 
 demo:
@@ -19,6 +23,11 @@ demo:
 
 metrics:
 	@$(PYTHON) scripts/ados.py metrics
+
+dashboard: metrics
+
+audit:
+	@$(PYTHON) scripts/ados.py audit-stale
 
 clean:
 	@rm -f observability/events/*.jsonl docs/metrics/latest.md

@@ -1,0 +1,15 @@
+{
+  "default":["tests/test_validation.py"],
+  "paths":{
+    "src/agentic_os/telemetry.py":["tests/test_telemetry.py","tests/test_metrics.py"],
+    "src/agentic_os/metrics.py":["tests/test_metrics.py"],
+    "src/agentic_os/governance.py":["tests/test_governance.py"],
+    "src/agentic_os/architecture.py":["tests/test_architecture.py"],
+    "src/agentic_os/tooling.py":["tests/test_tooling.py"],
+    "src/agentic_os/growth.py":["tests/test_growth.py"],
+    "docs/prd/":["tests/test_validation.py"],"docs/specs/":["tests/test_validation.py"],
+    "docs/tickets/":["tests/test_validation.py","tests/test_governance.py"],
+    "docs/trace/":["tests/test_validation.py"],"architecture.json":["tests/test_architecture.py"],
+    "tools/":["tests/test_tooling.py"],"observability/":["tests/test_telemetry.py","tests/test_metrics.py"]
+  }
+}

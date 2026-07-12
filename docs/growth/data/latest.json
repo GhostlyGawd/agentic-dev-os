@@ -1,0 +1,17 @@
+{
+  "conversion_rates": {
+    "adopted_to_retained": 0.0,
+    "demo_to_trial": 0.0,
+    "retained_to_advocate": 0.0,
+    "trial_to_adopted": 0.0,
+    "visitor_to_demo": 0.0
+  },
+  "totals": {
+    "adopted": 0,
+    "advocate": 0,
+    "demo": 0,
+    "retained": 0,
+    "trial": 0,
+    "visitor": 0
+  }
+}

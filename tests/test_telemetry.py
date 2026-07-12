@@ -1,38 +1,28 @@
-"""Telemetry and metric tests. TEST-003."""
-from __future__ import annotations
-
+"""TEST-009; MASTER-TEST-004."""
 import tempfile
+import json
 import unittest
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-from agentic_os.telemetry import append_event, build_event, read_events, summarize
+ROOT=Path(__file__).resolve().parents[1]; sys.path.insert(0,str(ROOT/"src"))
+from agentic_os.telemetry import EVENT_NAMES,append_event,build_event,read_events
 
 
 class TelemetryTests(unittest.TestCase):
-    def test_complete_first_pass_run_TEST_003(self) -> None:
-        events = [
-            build_event("loop.started", "run-1", "TICKET-001"),
-            build_event("verification.completed", "run-1", "TICKET-001", outcome="passed"),
-            build_event("loop.stopped", "run-1", "TICKET-001", outcome="success", human_intervention=False),
-        ]
-        summary = summarize(events)
-        self.assertEqual(1.0, summary["first_pass_success_rate"])
-        self.assertEqual(1.0, summary["event_completeness_rate"])
+    def test_every_catalogued_event_validates(self):
+        for name in EVENT_NAMES: build_event(name,"run-1","SYSTEM" if not name.startswith("loop.") else "TICKET-001")
+        schema=json.loads((ROOT/"observability/schema/event.schema.json").read_text())
+        self.assertEqual(EVENT_NAMES,set(schema["properties"]["event_name"]["enum"]))
 
-    def test_round_trip_TEST_003(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "events.jsonl"
-            event = build_event("loop.started", "run-1", "TICKET-001")
-            append_event(path, event)
-            self.assertEqual([event], read_events(path))
+    def test_sensitive_metadata_is_redacted(self):
+        event=build_event("agent.action","r","TICKET-001",metadata={"token":"unsafe","nested":{"password":"unsafe"}})
+        self.assertEqual("[REDACTED]",event["metadata"]["token"]); self.assertEqual("[REDACTED]",event["metadata"]["nested"]["password"])
 
-    def test_invalid_event_rejected_TEST_003(self) -> None:
-        with self.assertRaises(ValueError):
-            build_event("unknown", "run-1", "TICKET-001")
+    def test_jsonl_round_trip_and_invalid_line(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/"events.jsonl"; event=build_event("loop.started","r","TICKET-001"); append_event(path,event); self.assertEqual([event],read_events(path)); path.write_text("{}\n")
+            with self.assertRaises(ValueError): read_events(path)
 
 
-if __name__ == "__main__":
-    unittest.main()
+if __name__=="__main__": unittest.main()

@@ -50,7 +50,7 @@ Useful post → README → `make demo` → adapt one ticket → shadow-mode tria
 
 ## Metrics
 
-Track qualified clones, demo completions, first ticket completion, week-four retention, community questions answered, case studies, and content-to-adoption conversion. Treat stars and page views as context, not success.
+Track unique and returning visitors, GitHub stars and forks, template downloads, demo completions, community signups, subscribers, shares and mentions, trial-to-adoption conversion, content-to-signup conversion, first-ticket completion, week-four retention, questions answered, and case studies. Treat raw traffic as context; qualified adoption and retention are success.
 
 ## Weekly cadence
 

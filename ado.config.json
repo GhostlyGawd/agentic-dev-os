@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "max_retries": 3,
+  "stale_after_days": 90,
+  "archive_statuses": ["Complete", "Cancelled"],
+  "risk_approval_required": ["R2", "R3"],
+  "required_loop_events": ["loop.started", "verification.completed", "loop.stopped", "metric.summary"],
+  "metric_thresholds": {
+    "traceability_coverage": {"minimum": 0.95},
+    "first_pass_success_rate": {"minimum": 0.80},
+    "event_completeness_rate": {"minimum": 0.95},
+    "architecture_violation_count": {"maximum": 0},
+    "regression_rate": {"maximum": 0.05}
+  },
+  "sensitive_key_patterns": ["token", "secret", "password", "credential", "authorization"],
+  "owners_file": "docs/operating-model/owners.json",
+  "trace_file": "docs/trace/traceability.json",
+  "compliance_file": "docs/trace/master-compliance.json",
+  "event_file": "observability/events/loops.jsonl"
+}
