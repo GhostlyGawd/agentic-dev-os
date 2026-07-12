@@ -53,11 +53,13 @@ Repository scaffolding, local CLI, validation, tests, CI, telemetry, and documen
 
 ## Files Allowed
 - README.md
+- MASTER.md
 - LICENSE
 - .gitignore
 - Makefile
 - pyproject.toml
 - CONTRIBUTING.md
+- ado.config.json
 - architecture.json
 - agent/
 - ci/
@@ -66,6 +68,7 @@ Repository scaffolding, local CLI, validation, tests, CI, telemetry, and documen
 - scripts/
 - src/
 - tests/
+- tools/catalog.json
 - .github/
 
 ## Steps
