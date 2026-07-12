@@ -1,0 +1,12 @@
+[project]
+name = "agentic-development-os"
+version = "0.1.0"
+description = "Governed operating system for traceable AI-assisted product delivery"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.ruff]
+line-length = 100
+
+[tool.pyright]
+pythonVersion = "3.11"

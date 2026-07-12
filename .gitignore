@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.coverage
+.pytest_cache/
+.venv/
+dist/
+build/
+observability/events/*.jsonl
+!observability/events/.gitkeep
+docs/metrics/latest.md

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agentic OS Event",
+  "type": "object",
+  "required": ["schema_version", "event_name", "event_id", "timestamp", "run_id", "ticket_id", "actor"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "event_name": {"enum": ["loop.started", "loop.retried", "verification.completed", "loop.stopped", "human.intervened"]},
+    "event_id": {"type": "string"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "run_id": {"type": "string"},
+    "ticket_id": {"type": "string", "pattern": "^TICKET-[0-9]{3,}$"},
+    "actor": {"type": "string"},
+    "outcome": {"enum": ["success", "failure", "handoff", "passed", "failed"]},
+    "duration_ms": {"type": "integer", "minimum": 0},
+    "retry_count": {"type": "integer", "minimum": 0},
+    "human_intervention": {"type": "boolean"},
+    "cost_usd": {"type": "number", "minimum": 0},
+    "metadata": {"type": "object"}
+  },
+  "additionalProperties": false
+}

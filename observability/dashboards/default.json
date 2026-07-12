@@ -1,0 +1,10 @@
+{
+  "title": "Agentic Delivery Health",
+  "panels": [
+    {"metric":"METRIC-001","title":"Trace coverage","threshold":0.95},
+    {"metric":"METRIC-002","title":"First-pass success","threshold":0.80},
+    {"metric":"METRIC-003","title":"Human intervention rate"},
+    {"metric":"METRIC-004","title":"Event completeness","threshold":0.95},
+    {"metric":"METRIC-005","title":"Architecture violations","threshold":0}
+  ]
+}

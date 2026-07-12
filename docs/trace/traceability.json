@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "records": [
+    {"requirement_id":"PRD-001-R01","requirement":"Validate end-to-end traceability","spec_ref":"SPEC-001-A01","ticket_ref":"TICKET-001","code_ref":"src/agentic_os/validation.py","test_ref":"TEST-001","metric_ref":"METRIC-001","status":"Complete","version":"0.1.0"},
+    {"requirement_id":"PRD-001-R02","requirement":"Reject incomplete ticket contracts","spec_ref":"SPEC-001-A02","ticket_ref":"TICKET-001","code_ref":"src/agentic_os/validation.py","test_ref":"TEST-002","metric_ref":"METRIC-001","status":"Complete","version":"0.1.0"},
+    {"requirement_id":"PRD-001-R03","requirement":"Record structured lifecycle events","spec_ref":"SPEC-001-A03","ticket_ref":"TICKET-001","code_ref":"src/agentic_os/telemetry.py","test_ref":"TEST-003","metric_ref":"METRIC-004","status":"Complete","version":"0.1.0"},
+    {"requirement_id":"PRD-001-R04","requirement":"Enforce dependency boundaries","spec_ref":"SPEC-001-A05","ticket_ref":"TICKET-001","code_ref":"tests/test_architecture.py","test_ref":"TEST-004","metric_ref":"METRIC-005","status":"Complete","version":"0.1.0"},
+    {"requirement_id":"PRD-001-R05","requirement":"Summarize reliability metrics","spec_ref":"SPEC-001-A04","ticket_ref":"TICKET-001","code_ref":"src/agentic_os/telemetry.py","test_ref":"TEST-003","metric_ref":"METRIC-002","status":"Complete","version":"0.1.0"}
+  ]
+}

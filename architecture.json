@@ -1,0 +1,12 @@
+{
+  "modules": {
+    "src/agentic_os": {
+      "may_import": [],
+      "owner": "platform"
+    },
+    "scripts": {
+      "may_import": ["src/agentic_os"],
+      "owner": "developer-experience"
+    }
+  }
+}
