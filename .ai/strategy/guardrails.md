@@ -9,6 +9,7 @@
 - A generated CSV becomes an editable source of truth.
 - A PRD is created to rationalize an already-started feature.
 - An opportunity is treated as evidenced without a cited observation.
+- A synthetic or seeded demo record is counted as market validation (FINDING-001).
 
 ## Accepted Tradeoffs
 - A small amount of explicit product documentation before implementation.
