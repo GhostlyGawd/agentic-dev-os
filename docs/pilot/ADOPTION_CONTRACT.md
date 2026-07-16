@@ -72,6 +72,14 @@ A change is backward-compatible only when current pilot consumers pass their dec
 - separately reviewable consumer pull requests;
 - rollback evidence.
 
+## First cross-product learning proposal
+
+Evidence from both active product pilots showed the same portability failure class: committed machine-local configuration. That evidence is generalized as the [portable repository contract](PORTABLE_REPOSITORY_CONTRACT.md).
+
+The harness contribution is a read-only reusable workflow with a positive profile run and synthetic detector self-tests. Consumers call the workflow by immutable merge SHA; they do not copy a harness folder or depend on an unpublished release.
+
+This records product evidence → general classification → upstream implementation → acceptance run. It remains incomplete until consumer update pull requests pass their local checks and are explicitly accepted.
+
 ## Canonicalization gate
 
 The harness may be proposed as canonical only after:
