@@ -12,12 +12,29 @@ The caller must commit `portfolio-profile.json` with:
 - `repository`
 - `purpose`
 - `family`
+- `lifecycle`
 - `maturity`
+- `investment`
+- `disposition`
 - `visibility_intent`
 - `owner`
 - `lineage`
-- `data_class`
+- `data_classification`
+- `capability_role`
+- `portfolio_standard_ref`
 - `harness_ref`
+
+The controlled values intentionally match the central registry and remain independent:
+
+| Axis | Values |
+| --- | --- |
+| Lifecycle | `proposed`, `active`, `paused`, `superseded`, `archived` |
+| Maturity | `lab`, `beta`, `stable` |
+| Investment | `flagship`, `supported`, `incubating`, `maintenance-only`, `none` |
+| Disposition | `public-product`, `private-operational`, `extract-and-publish`, `archive` |
+| Data classification | `public`, `internal`, `confidential`, `restricted` |
+
+`visibility_intent` is a nonempty description rather than a second disposition enum. `capability_role`, `portfolio_standard_ref`, and `harness_ref` make the repository's system role and governing versions explicit.
 
 The validation job also scans tracked text files for loopback hostnames, a common machine-local proxy marker, and user-specific absolute home paths. Binary files, files larger than 2 MB, the workflow implementation itself, and explicit contract fixtures are excluded.
 
