@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "repository": "GhostlyGawd/agentic-dev-os",
+  "purpose": "Evaluate a governed and portable agentic-development harness.",
+  "family": "agentic-development-harness",
+  "maturity": "lab",
+  "visibility_intent": "public",
+  "owner": "GhostlyGawd",
+  "lineage": [],
+  "data_class": "public-engineering",
+  "harness_ref": "self:source-1.1.0"
+}
