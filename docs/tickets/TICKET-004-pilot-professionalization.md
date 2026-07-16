@@ -60,7 +60,7 @@ Documentation, agent orientation, dependency automation, workflow supply-chain p
 - [x] Workflow action dependencies are immutable and CodeQL is configured.
 - [x] Ticket-authored verification cannot invoke a shell, chain commands, redirect, substitute, or execute a non-allowlisted program.
 - [x] Allowlisted verification commands preserve pass/fail behavior.
-- [x] The reusable contract validates the portfolio profile and reports machine-local portability failures only as opaque IDs and status.
+- [x] The reusable contract validates the portfolio profile using the registry's independent lifecycle, maturity, investment, disposition, and data-classification axes and reports machine-local portability failures only as opaque IDs and status.
 - [x] The reusable contract passes against this repository and can be called by consumers at an immutable commit SHA.
 - [x] `make verify` and `make product` pass in GitHub Actions.
 - [x] Governance and Security workflows pass on the pull request.
@@ -80,4 +80,4 @@ Documentation, agent orientation, dependency automation, workflow supply-chain p
 The pilot owner authorized this bounded repository slice. The public surface now states its Lab and non-canonical status; the governance, security, and portable-contract checks prove the repository-level outcome. External usability, consumer acceptance, release, and canonicalization remain separate gates.
 
 ## Completion Notes
-Implementation head `f438d05d7d8f17c18a002a0d93fadbea11053ded` passed Governance (`29513836145`), Security/CodeQL (`29513836730`), and Portable Repository Contract (`29513836843`). The ticket was then closed and its R3 approval rebound to this exact ticket digest; the metadata-only close reruns the same checks.
+Implementation head `f438d05d7d8f17c18a002a0d93fadbea11053ded` passed Governance (`29513836145`), Security/CodeQL (`29513836730`), and Portable Repository Contract (`29513836843`). The ticket was then closed, the profile taxonomy was aligned to the central registry, and its R3 approval was rebound to the exact final ticket digest; the metadata-only updates rerun the same checks.
