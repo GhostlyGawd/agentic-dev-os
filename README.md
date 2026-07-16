@@ -122,6 +122,7 @@ The candidate role, security baseline, and decision gates are documented in:
 - [Pilot baseline](docs/pilot/BASELINE.md)
 - [Remediation plan](docs/pilot/REMEDIATION_PLAN.md)
 - [Adoption and learning contract](docs/pilot/ADOPTION_CONTRACT.md)
+- [Portable repository contract](docs/pilot/PORTABLE_REPOSITORY_CONTRACT.md)
 - [Security policy](SECURITY.md)
 
 ## Design principles
