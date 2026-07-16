@@ -14,6 +14,17 @@ Current classification:
 
 Portfolio inventory and rollout authority live in `GhostlyGawd/repo-audit`. Query that control plane when portfolio context is needed; do not copy the entire portfolio registry into this repository.
 
+## Portfolio synchronization
+
+Before material work, resolve this repository's live owner/name, default branch,
+and current commit SHA. Then read the matching central record in
+`GhostlyGawd/repo-audit` together with this repository's local instructions.
+
+`portfolio-profile.json` is a mirror of the central governance record, not an
+independent source of truth. Propose a `repo-audit` update when identity, family,
+lifecycle, maturity, investment, disposition, visibility intent, lineage, data
+classification, or capability role changes. After that decision is merged,
+synchronize this local mirror through an explicit product pull request.
 ## Orientation order
 
 Before changing anything:
