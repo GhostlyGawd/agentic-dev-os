@@ -87,11 +87,16 @@ jobs:
                   "repository": str,
                   "purpose": str,
                   "family": str,
+                  "lifecycle": str,
                   "maturity": str,
+                  "investment": str,
+                  "disposition": str,
                   "visibility_intent": str,
                   "owner": str,
                   "lineage": list,
-                  "data_class": str,
+                  "data_classification": str,
+                  "capability_role": str,
+                  "portfolio_standard_ref": str,
                   "harness_ref": str,
               }
               if any(not isinstance(profile.get(key), kind) for key, kind in required.items()):
@@ -100,11 +105,15 @@ jobs:
                   raise ValueError
               if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", profile["repository"]):
                   raise ValueError
-              if profile["maturity"] not in {"lab", "beta", "stable", "archived"}:
+              if profile["lifecycle"] not in {"proposed", "active", "paused", "superseded", "archived"}:
                   raise ValueError
-              if profile["visibility_intent"] not in {"public", "private", "extract-and-publish", "archive"}:
+              if profile["maturity"] not in {"lab", "beta", "stable"}:
                   raise ValueError
-              if profile["data_class"] not in {"public-engineering", "private-operational", "sensitive", "restricted"}:
+              if profile["investment"] not in {"flagship", "supported", "incubating", "maintenance-only", "none"}:
+                  raise ValueError
+              if profile["disposition"] not in {"public-product", "private-operational", "extract-and-publish", "archive"}:
+                  raise ValueError
+              if profile["data_classification"] not in {"public", "internal", "confidential", "restricted"}:
                   raise ValueError
               if not all(isinstance(item, str) and item for item in profile["lineage"]):
                   raise ValueError
