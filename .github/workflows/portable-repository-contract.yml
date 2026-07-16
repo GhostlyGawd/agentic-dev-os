@@ -71,7 +71,7 @@ jobs:
 
           expected = {
               "ADO-PORT-002": "http://" + "local" + "host:3000",
-              "ADO-PORT-003": "use_" + "local" + "_" + "proxy",
+              "ADO-PORT-003": "set " + "local" + "_" + "proxy" + "=1",
               "ADO-PORT-004": "C:" + "\\Users\\" + "pilot\\artifact",
           }
           if any(item not in classify(sample) for item, sample in expected.items()) or classify("portable.example"):
