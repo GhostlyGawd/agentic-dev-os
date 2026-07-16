@@ -6,6 +6,6 @@
   "reason": "Repository owner explicitly approved full pilot execution; authorization is bounded to TICKET-004 and this isolated branch.",
   "granted_at": "2026-07-16T15:58:15.593Z",
   "expires_at": null,
-  "ticket_digest": "c1d08f84f4f9f96d642bf2525fab60228e572bf80e4755142799d6ea4ee58da8",
+  "ticket_digest": "782b5b16c5158bb6a5ecdd238c602608a64db517ef246b68e23ad6372d6b5246",
   "status": "active"
 }
