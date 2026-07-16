@@ -4,7 +4,7 @@ This plan starts from the [baseline](BASELINE.md). Each phase has a stop gate. S
 
 ## Phase 1 — Truthful and inspectable surface
 
-Owner: repository maintainer  
+Owner: repository maintainer
 Risk: R1
 
 - Add root agent guidance and a security disclosure policy.
@@ -26,7 +26,7 @@ Stop if the change requires repository settings, credentials, licensing, product
 
 ## Phase 2 — Security reconciliation
 
-Owner: maintainer with private security context  
+Owner: maintainer with private security context
 Risk: R2/R3 when a finding or control change warrants it
 
 - Rebase and re-verify the open hardening change against current `main`.
