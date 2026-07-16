@@ -44,9 +44,10 @@ Trace rows contain outcome, opportunity, bet, PRD requirement, spec, milestone, 
 - SPEC-001-A16: Growth funnel events and reports are executable.
 - SPEC-001-A17: Every master obligation resolves to implementation and evidence.
 - SPEC-001-A18: Negative paths and an end-to-end demo prove enforcement.
+- SPEC-001-A19: Ticket verification commands execute as allowlisted argv lists, never through a shell.
 
 ## Test Plan
-TEST-001 covers traces; TEST-002 covers tickets; TEST-003 covers events and metrics; TEST-004 covers architecture.
+TEST-001 covers traces; TEST-002 covers tickets; TEST-003 covers events and metrics; TEST-004 covers architecture; TEST-029 and TEST-030 cover verification command allowlisting and shell-free execution.
 
 ## Telemetry
 METRIC-001 through METRIC-005 are defined in `docs/metrics/catalog.md`.

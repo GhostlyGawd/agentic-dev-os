@@ -1,0 +1,155 @@
+name: Portable Repository Contract
+
+on:
+  workflow_call:
+    inputs:
+      profile_path:
+        description: Repository-relative portfolio profile path
+        required: false
+        type: string
+        default: portfolio-profile.json
+  pull_request:
+    paths:
+      - portfolio-profile.json
+      - .github/workflows/portable-repository-contract.yml
+      - docs/pilot/PORTABLE_REPOSITORY_CONTRACT.md
+  workflow_dispatch:
+    inputs:
+      profile_path:
+        description: Repository-relative portfolio profile path
+        required: false
+        type: string
+        default: portfolio-profile.json
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Portable contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out caller repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Validate profile and portability
+        env:
+          PROFILE_PATH: ${{ inputs.profile_path || 'portfolio-profile.json' }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import subprocess
+          from pathlib import Path
+
+          IDS = ("ADO-PORT-001", "ADO-PORT-002", "ADO-PORT-003", "ADO-PORT-004", "ADO-PORT-005")
+          status = {item: "PASS" for item in IDS}
+          root = Path.cwd().resolve()
+
+          def classify(text):
+              found = set()
+              if re.search(r"\b" + "local" + r"host\b", text, re.IGNORECASE):
+                  found.add("ADO-PORT-002")
+              if re.search(r"\b" + "local" + "_" + r"proxy\b", text, re.IGNORECASE):
+                  found.add("ADO-PORT-003")
+              user_path = re.compile(
+                  r"""(?ix)
+                  (?:\b[A-Z]:[\\/](?:Users|Documents[ ]and[ ]Settings)[\\/][^\\/\s"'<>]+)
+                  |(?:(?<![\w])/(?:Users|home)/[^/\s"'<>]+)
+                  |(?:(?<![\w])/root/)
+                  """
+              )
+              if user_path.search(text):
+                  found.add("ADO-PORT-004")
+              return found
+
+          expected = {
+              "ADO-PORT-002": "http://" + "local" + "host:3000",
+              "ADO-PORT-003": "set " + "local" + "_" + "proxy" + "=1",
+              "ADO-PORT-004": "C:" + "\\Users\\" + "pilot\\artifact",
+          }
+          if any(item not in classify(sample) for item, sample in expected.items()) or classify("portable.example"):
+              status["ADO-PORT-005"] = "FAIL"
+
+          try:
+              candidate = (root / os.environ["PROFILE_PATH"]).resolve()
+              if root not in candidate.parents or not candidate.is_file():
+                  raise ValueError
+              profile = json.loads(candidate.read_text(encoding="utf-8"))
+              required = {
+                  "schema_version": str,
+                  "repository": str,
+                  "purpose": str,
+                  "family": str,
+                  "lifecycle": str,
+                  "maturity": str,
+                  "investment": str,
+                  "disposition": str,
+                  "visibility_intent": str,
+                  "owner": str,
+                  "lineage": list,
+                  "data_classification": str,
+                  "capability_role": str,
+                  "portfolio_standard_ref": str,
+                  "harness_ref": str,
+              }
+              if any(not isinstance(profile.get(key), kind) for key, kind in required.items()):
+                  raise ValueError
+              if profile["schema_version"] != "1.0":
+                  raise ValueError
+              if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", profile["repository"]):
+                  raise ValueError
+              if profile["lifecycle"] not in {"proposed", "active", "paused", "superseded", "archived"}:
+                  raise ValueError
+              if profile["maturity"] not in {"lab", "beta", "stable"}:
+                  raise ValueError
+              if profile["investment"] not in {"flagship", "supported", "incubating", "maintenance-only", "none"}:
+                  raise ValueError
+              if profile["disposition"] not in {"public-product", "private-operational", "extract-and-publish", "archive"}:
+                  raise ValueError
+              if profile["data_classification"] not in {"public", "internal", "confidential", "restricted"}:
+                  raise ValueError
+              if not all(isinstance(item, str) and item for item in profile["lineage"]):
+                  raise ValueError
+              if any(not profile[key].strip() for key in required if key != "lineage"):
+                  raise ValueError
+          except (OSError, ValueError, json.JSONDecodeError):
+              status["ADO-PORT-001"] = "FAIL"
+
+          listed = subprocess.run(
+              ["git", "ls-files", "-z"],
+              check=True,
+              capture_output=True,
+          ).stdout.split(b"\0")
+          excluded = {
+              ".github/workflows/portable-repository-contract.yml",
+          }
+          for raw_path in listed:
+              if not raw_path:
+                  continue
+              relative = raw_path.decode("utf-8", errors="surrogateescape")
+              if relative in excluded or relative.startswith("tests/fixtures/portable-contract/"):
+                  continue
+              path = root / relative
+              try:
+                  data = path.read_bytes()
+              except OSError:
+                  continue
+              if len(data) > 2_000_000 or b"\0" in data:
+                  continue
+              text = data.decode("utf-8", errors="ignore")
+              for item in classify(text):
+                  status[item] = "FAIL"
+
+          for item in IDS:
+              print(f"{item} {status[item]}")
+          overall = "PASS" if all(value == "PASS" for value in status.values()) else "FAIL"
+          print(f"ADO-PORT {overall}")
+          raise SystemExit(0 if overall == "PASS" else 1)
+          PY

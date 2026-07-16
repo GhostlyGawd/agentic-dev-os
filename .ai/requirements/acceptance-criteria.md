@@ -19,6 +19,7 @@
 - SPEC-001-A16: Growth funnel events and reports are executable. (source: `docs/specs/SPEC-001-governance-runtime.md`)
 - SPEC-001-A17: Every master obligation resolves to implementation and evidence. (source: `docs/specs/SPEC-001-governance-runtime.md`)
 - SPEC-001-A18: Negative paths and an end-to-end demo prove enforcement. (source: `docs/specs/SPEC-001-governance-runtime.md`)
+- SPEC-001-A19: Ticket verification commands execute as allowlisted argv lists, never through a shell. (source: `docs/specs/SPEC-001-governance-runtime.md`)
 - SPEC-003-A01: All required context and strategy artifacts validate. (source: `docs/specs/SPEC-003-product-strategy-integration.md`)
 - SPEC-003-A02: Opportunities require outcomes and evidence. (source: `docs/specs/SPEC-003-product-strategy-integration.md`)
 - SPEC-003-A03: Bets require valid upstream links and validation criteria. (source: `docs/specs/SPEC-003-product-strategy-integration.md`)
