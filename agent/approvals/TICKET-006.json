@@ -6,6 +6,6 @@
   "reason": "Repository owner explicitly requested merging all pilot-generated Dependabot updates; authorization is bound to this consolidated workflow-only ticket.",
   "granted_at": "2026-07-16T19:22:05.6519388Z",
   "expires_at": null,
-  "ticket_digest": "e0b166c52500c8b2e9f962875c9b5515de04b6fdaf3f9ecca45594b706695fe6",
+  "ticket_digest": "77dd71dca420d984d38513bce23e30d300f7b65b857a3d54ffad06d73d84738a",
   "status": "active"
 }
