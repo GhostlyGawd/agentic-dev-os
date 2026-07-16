@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "ticket_id": "TICKET-004",
+  "risk": "R3",
+  "approver": "GhostlyGawd",
+  "reason": "Repository owner explicitly approved full pilot execution; authorization is bounded to TICKET-004 and this isolated branch.",
+  "granted_at": "2026-07-16T15:58:15.593Z",
+  "expires_at": null,
+  "ticket_digest": "e9223c7568f0bfb08c6004e4472740753d18147fae5f7efd2a9ba2cddc8afd6b",
+  "status": "active"
+}
