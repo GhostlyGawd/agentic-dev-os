@@ -1,0 +1,9 @@
+{
+  "approver": "GhostlyGawd",
+  "expires_at": null,
+  "granted_at": "2026-07-16T15:53:20.317Z",
+  "reason": "Repository owner explicitly approved full pilot execution; authorization is bounded to TICKET-004 and this isolated branch.",
+  "risk": "R3",
+  "status": "active",
+  "ticket_digest": "69beb5a36856c88203125d92f7bc09156fcceefd7d87e1ee5373cc63ab3bd04b"
+}
