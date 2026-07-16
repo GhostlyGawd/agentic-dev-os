@@ -35,7 +35,7 @@ Documentation, agent orientation, dependency automation, workflow supply-chain p
 - docs/pilot/
 - docs/specs/SPEC-001-governance-runtime.md
 - docs/tickets/TICKET-004-pilot-professionalization.md
-- observability/approvals/TICKET-004.json
+- agent/approvals/TICKET-004.json
 - src/agentic_os/governance.py
 - tests/test_governance.py
 
