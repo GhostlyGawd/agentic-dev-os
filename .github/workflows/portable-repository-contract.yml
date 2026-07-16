@@ -9,10 +9,8 @@ on:
         type: string
         default: portfolio-profile.json
   pull_request:
-    paths:
-      - portfolio-profile.json
-      - .github/workflows/portable-repository-contract.yml
-      - docs/pilot/PORTABLE_REPOSITORY_CONTRACT.md
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       profile_path:
@@ -38,6 +36,7 @@ jobs:
 
       - name: Validate profile and portability
         env:
+          EXPECTED_REPOSITORY: ${{ github.repository }}
           PROFILE_PATH: ${{ inputs.profile_path || 'portfolio-profile.json' }}
         shell: bash
         run: |
@@ -48,7 +47,7 @@ jobs:
           import subprocess
           from pathlib import Path
 
-          IDS = ("ADO-PORT-001", "ADO-PORT-002", "ADO-PORT-003", "ADO-PORT-004", "ADO-PORT-005")
+          IDS = ("ADO-PORT-001", "ADO-PORT-002", "ADO-PORT-003", "ADO-PORT-004", "ADO-PORT-005", "ADO-PORT-006")
           status = {item: "PASS" for item in IDS}
           root = Path.cwd().resolve()
 
@@ -69,6 +68,50 @@ jobs:
                   found.add("ADO-PORT-004")
               return found
 
+          REQUIRED_PROFILE = {
+              "schema_version": str,
+              "repository": str,
+              "purpose": str,
+              "family": str,
+              "lifecycle": str,
+              "maturity": str,
+              "investment": str,
+              "disposition": str,
+              "visibility_intent": str,
+              "owner": str,
+              "lineage": list,
+              "data_classification": str,
+              "capability_role": str,
+              "portfolio_standard_ref": str,
+              "harness_ref": str,
+          }
+
+          def valid_profile(profile, expected_repository):
+              try:
+                  if any(not isinstance(profile.get(key), kind) for key, kind in REQUIRED_PROFILE.items()):
+                      return False
+                  if profile["schema_version"] != "1.0":
+                      return False
+                  if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", profile["repository"]):
+                      return False
+                  if not expected_repository or profile["repository"].casefold() != expected_repository.casefold():
+                      return False
+                  if profile["lifecycle"] not in {"proposed", "active", "paused", "superseded", "archived"}:
+                      return False
+                  if profile["maturity"] not in {"lab", "beta", "stable"}:
+                      return False
+                  if profile["investment"] not in {"flagship", "supported", "incubating", "maintenance-only", "none"}:
+                      return False
+                  if profile["disposition"] not in {"public-product", "private-operational", "extract-and-publish", "archive"}:
+                      return False
+                  if profile["data_classification"] not in {"public", "internal", "confidential", "restricted"}:
+                      return False
+                  if not all(isinstance(item, str) and item for item in profile["lineage"]):
+                      return False
+                  return all(profile[key].strip() for key in REQUIRED_PROFILE if key != "lineage")
+              except (AttributeError, TypeError):
+                  return False
+
           expected = {
               "ADO-PORT-002": "http://" + "local" + "host:3000",
               "ADO-PORT-003": "set " + "local" + "_" + "proxy" + "=1",
@@ -77,47 +120,43 @@ jobs:
           if any(item not in classify(sample) for item, sample in expected.items()) or classify("portable.example"):
               status["ADO-PORT-005"] = "FAIL"
 
+          profile_fixture = {
+              "schema_version": "1.0",
+              "repository": "Owner/Repo",
+              "purpose": "fixture",
+              "family": "fixture",
+              "lifecycle": "active",
+              "maturity": "lab",
+              "investment": "supported",
+              "disposition": "public-product",
+              "visibility_intent": "fixture",
+              "owner": "owner",
+              "lineage": [],
+              "data_classification": "public",
+              "capability_role": "fixture",
+              "portfolio_standard_ref": "fixture",
+              "harness_ref": "fixture",
+          }
+          case_variant = dict(profile_fixture, repository="owner/repo")
+          wrong_repository = dict(profile_fixture, repository="owner/other")
+          missing_field = dict(profile_fixture)
+          del missing_field["purpose"]
+          invalid_maturity = dict(profile_fixture, maturity="archived")
+          if (
+              not valid_profile(profile_fixture, "Owner/Repo")
+              or not valid_profile(case_variant, "Owner/Repo")
+              or valid_profile(wrong_repository, "Owner/Repo")
+              or valid_profile(missing_field, "Owner/Repo")
+              or valid_profile(invalid_maturity, "Owner/Repo")
+          ):
+              status["ADO-PORT-006"] = "FAIL"
+
           try:
               candidate = (root / os.environ["PROFILE_PATH"]).resolve()
               if root not in candidate.parents or not candidate.is_file():
                   raise ValueError
               profile = json.loads(candidate.read_text(encoding="utf-8"))
-              required = {
-                  "schema_version": str,
-                  "repository": str,
-                  "purpose": str,
-                  "family": str,
-                  "lifecycle": str,
-                  "maturity": str,
-                  "investment": str,
-                  "disposition": str,
-                  "visibility_intent": str,
-                  "owner": str,
-                  "lineage": list,
-                  "data_classification": str,
-                  "capability_role": str,
-                  "portfolio_standard_ref": str,
-                  "harness_ref": str,
-              }
-              if any(not isinstance(profile.get(key), kind) for key, kind in required.items()):
-                  raise ValueError
-              if profile["schema_version"] != "1.0":
-                  raise ValueError
-              if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", profile["repository"]):
-                  raise ValueError
-              if profile["lifecycle"] not in {"proposed", "active", "paused", "superseded", "archived"}:
-                  raise ValueError
-              if profile["maturity"] not in {"lab", "beta", "stable"}:
-                  raise ValueError
-              if profile["investment"] not in {"flagship", "supported", "incubating", "maintenance-only", "none"}:
-                  raise ValueError
-              if profile["disposition"] not in {"public-product", "private-operational", "extract-and-publish", "archive"}:
-                  raise ValueError
-              if profile["data_classification"] not in {"public", "internal", "confidential", "restricted"}:
-                  raise ValueError
-              if not all(isinstance(item, str) and item for item in profile["lineage"]):
-                  raise ValueError
-              if any(not profile[key].strip() for key in required if key != "lineage"):
+              if not valid_profile(profile, os.environ["EXPECTED_REPOSITORY"]):
                   raise ValueError
           except (OSError, ValueError, json.JSONDecodeError):
               status["ADO-PORT-001"] = "FAIL"

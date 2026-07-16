@@ -34,7 +34,7 @@ The controlled values intentionally match the central registry and remain indepe
 | Disposition | `public-product`, `private-operational`, `extract-and-publish`, `archive` |
 | Data classification | `public`, `internal`, `confidential`, `restricted` |
 
-`visibility_intent` is a nonempty description rather than a second disposition enum. `capability_role`, `portfolio_standard_ref`, and `harness_ref` make the repository's system role and governing versions explicit.
+`repository` must match the GitHub caller repository case-insensitively; a profile cannot claim a different repository. `visibility_intent` is a nonempty description rather than a second disposition enum. `capability_role`, `portfolio_standard_ref`, and `harness_ref` make the repository's system role and governing versions explicit.
 
 The validation job also scans tracked text files for loopback hostnames, a common machine-local proxy marker, and user-specific absolute home paths. Binary files, files larger than 2 MB, the workflow implementation itself, and explicit contract fixtures are excluded.
 
@@ -66,12 +66,13 @@ GitHub checks out the caller repository. The reusable workflow runs read-only, u
 
 ## Verification model
 
-The workflow runs directly on changes to its own implementation or profile, in addition to supporting `workflow_call`. Every run:
+The workflow runs directly on every pull request and every push to `main`, in addition to supporting `workflow_call` and `workflow_dispatch`. Every run:
 
 1. self-tests the three portability detectors using synthetic values assembled at runtime;
-2. validates this repository's positive profile;
-3. scans tracked text without emitting matched content;
-4. exits nonzero if any opaque rule fails.
+2. self-tests exact, case-variant, wrong-repository, missing-field, and invalid-enum profiles;
+3. binds the committed profile to the GitHub caller identity;
+4. scans tracked text without emitting matched content;
+5. exits nonzero if any opaque rule fails.
 
 Consumer repositories remain responsible for their own domain, security, build, and product checks. Passing this contract proves only the small profile and portability boundary.
 
