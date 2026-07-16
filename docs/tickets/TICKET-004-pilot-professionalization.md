@@ -30,11 +30,13 @@ Documentation, agent orientation, dependency automation, workflow supply-chain p
 - .github/CODEOWNERS
 - .github/dependabot.yml
 - .github/workflows/governance.yml
+- .github/workflows/portable-repository-contract.yml
 - .github/workflows/security.yml
 - docs/decisions/ADR-002-shell-free-verification.md
 - docs/pilot/
 - docs/specs/SPEC-001-governance-runtime.md
 - docs/tickets/TICKET-004-pilot-professionalization.md
+- portfolio-profile.json
 - agent/approvals/TICKET-004.json
 - src/agentic_os/governance.py
 - tests/test_governance.py
@@ -46,6 +48,7 @@ Documentation, agent orientation, dependency automation, workflow supply-chain p
 - Pin workflow actions and add dependency and code-scanning automation.
 - Execute ticket verification as reviewed, allowlisted argument vectors without a shell.
 - Add positive and negative regression tests and record the decision.
+- Convert product evidence about machine-local configuration into a reusable, stack-neutral repository contract.
 - Verify local-equivalent and GitHub Actions gates.
 - Record completion only after remote checks pass.
 
@@ -57,6 +60,8 @@ Documentation, agent orientation, dependency automation, workflow supply-chain p
 - [x] Workflow action dependencies are immutable and CodeQL is configured.
 - [ ] Ticket-authored verification cannot invoke a shell, chain commands, redirect, substitute, or execute a non-allowlisted program.
 - [ ] Allowlisted verification commands preserve pass/fail behavior.
+- [ ] The reusable contract validates the portfolio profile and reports machine-local portability failures only as opaque IDs and status.
+- [ ] The reusable contract passes against this repository and can be called by consumers at an immutable commit SHA.
 - [ ] `make verify` and `make product` pass in GitHub Actions.
 - [ ] Governance and Security workflows pass on the pull request.
 - [ ] Completion notes record the verified head SHA and check results.
