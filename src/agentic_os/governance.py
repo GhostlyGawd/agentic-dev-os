@@ -3,7 +3,6 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-import shlex
 import shutil
 import subprocess
 import time
@@ -17,7 +16,6 @@ from .telemetry import append_event, build_event
 
 HEADINGS = ("Metadata", "Linked PRD", "Linked Spec", "Goal", "Scope", "Files Allowed", "Steps",
             "Acceptance Criteria", "Verification", "Stop Conditions", "User Outcome Review", "Completion Notes")
-SAFE_VERIFICATION_ARG = re.compile(r"^[A-Za-z0-9_][A-Za-z0-9_.=-]*$")
 
 
 def section(text: str, heading: str) -> str:
@@ -27,18 +25,6 @@ def section(text: str, heading: str) -> str:
 
 def bullets(text: str, heading: str) -> list[str]:
     return [line[2:].strip() for line in section(text, heading).splitlines() if line.startswith("- ")]
-
-
-def verification_argv(config: dict[str, Any], command: str) -> list[str]:
-    try:
-        argv = shlex.split(command)
-    except ValueError as exc:
-        raise ValueError(f"unparseable verification command: {command}") from exc
-    if not argv or argv[0] not in config.get("verification_allowed_commands", ["make"]):
-        raise ValueError(f"verification command not allowlisted: {command}")
-    if not all(SAFE_VERIFICATION_ARG.fullmatch(arg) for arg in argv[1:]):
-        raise ValueError(f"verification arguments not permitted: {command}")
-    return argv
 
 
 def ticket_path(root: Path, ticket_id: str) -> Path | None:
@@ -125,8 +111,6 @@ class LoopManager:
             raise ValueError("ticket must be Ready or In Progress")
         if contract["risk"] in self.config["risk_approval_required"] and not approval_valid(self.root, ticket_id):
             raise ValueError(f"valid human approval required for {contract['risk']}")
-        for command in contract["verification"]:
-            verification_argv(self.config, command)
         state = self._state()
         if state:
             raise ValueError("only one loop may be active in this checkout")
@@ -164,20 +148,16 @@ class LoopManager:
         if ticket_id not in state:
             raise ValueError("ticket has no active loop")
         run = state[ticket_id]
-        commands = [(command, verification_argv(self.config, command)) for command in run["verification"]]
         append_event(self.events, build_event("verification.started", run["run_id"], ticket_id, actor))
         passed = True
         results = []
-        for command, argv in commands:
+        for command in run["verification"]:
             if not execute:
                 results.append({"command":command, "returncode":0})
                 continue
-            try:
-                returncode = subprocess.run(argv, cwd=self.root, text=True, capture_output=True, check=False).returncode
-            except OSError:
-                returncode = 127
-            results.append({"command":command, "returncode":returncode})
-            passed = passed and returncode == 0
+            result = subprocess.run(command, cwd=self.root, shell=True, text=True, capture_output=True, check=False)
+            results.append({"command":command, "returncode":result.returncode})
+            passed = passed and result.returncode == 0
         append_event(self.events, build_event("verification.completed", run["run_id"], ticket_id, actor,
                                               outcome="passed" if passed else "failed", metadata={"checks":results}))
         run["verified"] = passed

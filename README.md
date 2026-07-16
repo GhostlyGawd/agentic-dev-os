@@ -1,9 +1,6 @@
 # Agentic Development Operating System
 
-A governed, traceable, measurable product-delivery system for developers and small teams building software with AI agents. It connects product strategy and discovery to bounded implementation and operational proof.
-
-> [!IMPORTANT]
-> **Status: Lab-stage portfolio pilot candidate.** The repository declares source version `1.1.0`, but has no tagged release or package and is not yet the canonical portfolio harness. See the [pilot baseline](docs/pilot/BASELINE.md).
+A governed, traceable, measurable product-delivery system for teams building software with AI agents. It connects product strategy and discovery to bounded implementation and operational proof.
 
 This project turns product intent into bounded execution:
 
@@ -19,18 +16,14 @@ flowchart LR
 
 It includes working validation, event collection, metric summaries, architecture boundaries, CI gates, templates, and a complete example trace chain. It has no runtime dependencies beyond Python 3.11+.
 
-## Run from source
-
-Prerequisites: Python 3.11+, Git, and GNU Make on a Unix-like shell.
+## Quick start
 
 ```bash
-git clone https://github.com/GhostlyGawd/agentic-dev-os.git
-cd agentic-dev-os
 make verify
 make demo
 ```
 
-These commands exercise the repository itself; they are not an installer for another product repository. `make verify` checks all 100 master obligations, the full product and delivery chain, deterministic generated views, artifact contracts, tool naming, ownership, architecture, telemetry, real lint rules, and positive/negative tests. `make demo` exercises a complete loop and generates metrics, alerts, JSON evidence, and a static HTML dashboard.
+`make verify` checks all 100 master obligations, the full product and delivery chain, deterministic generated views, artifact contracts, tool naming, ownership, architecture, telemetry, real lint rules, and positive/negative tests. `make demo` exercises a complete loop and generates metrics, alerts, JSON evidence, and a static HTML dashboard.
 
 ## Product workflow
 
@@ -105,25 +98,6 @@ The enforced chain is:
 ## Adoption
 
 Start in shadow mode: agents propose a ticket plan and file scope, while a human executes or approves it. Move low-risk, reversible work to autonomous execution only after the metrics show reliable first-pass success and low intervention. See [adoption](docs/specs/SPEC-002-adoption.md) and [growth strategy](docs/growth/strategy.md).
-
-## Pilot evidence and limits
-
-The source snapshot has working validators, tests, synthetic telemetry, a static dashboard, and successful Governance runs. It does **not** yet have:
-
-- a tagged release, published package, or supported version line;
-- an independently verified five-minute setup;
-- a proven cross-repository installer or migration path;
-- production-use evidence;
-- completed secret-scanning, branch-protection, or release gates;
-- a completed product → harness → version → consumer-update learning round trip.
-
-The candidate role, security baseline, and decision gates are documented in:
-
-- [Pilot baseline](docs/pilot/BASELINE.md)
-- [Remediation plan](docs/pilot/REMEDIATION_PLAN.md)
-- [Adoption and learning contract](docs/pilot/ADOPTION_CONTRACT.md)
-- [Portable repository contract](docs/pilot/PORTABLE_REPOSITORY_CONTRACT.md)
-- [Security policy](SECURITY.md)
 
 ## Design principles
 
