@@ -3,7 +3,7 @@
 ## Metadata
 - Owner: Platform
 - Risk: R1
-- Status: In Progress
+- Status: Complete
 
 ## Linked PRD
 - PRD-001-R15
@@ -30,12 +30,12 @@ The reusable portability workflow, its deterministic inline self-tests, and its 
 - Verify all repository workflows.
 
 ## Acceptance Criteria
-- [ ] A matching repository value passes regardless of case.
-- [ ] A syntactically valid but different repository value fails.
-- [ ] Invalid profile fixtures fail deterministically.
-- [ ] Direct enforcement runs on every pull request and push to main.
-- [ ] `workflow_call` and `workflow_dispatch` remain available.
-- [ ] Governance, CodeQL, and Portable Repository Contract checks pass.
+- [x] A matching repository value passes regardless of case.
+- [x] A syntactically valid but different repository value fails.
+- [x] Invalid profile fixtures fail deterministically.
+- [x] Direct enforcement runs on every pull request and push to main.
+- [x] `workflow_call` and `workflow_dispatch` remain available.
+- [x] Governance, CodeQL, and Portable Repository Contract checks pass.
 
 ## Verification
 - `make verify`
@@ -48,7 +48,7 @@ The reusable portability workflow, its deterministic inline self-tests, and its 
 - A change requires repository settings, visibility, release, license, production, credentials, or a consumer repository.
 
 ## User Outcome Review
-Pending remote verification.
+The contract now rejects a profile that names a different caller repository, accepts case-only differences, and runs for every ordinary change while preserving reusable and manual invocation.
 
 ## Completion Notes
-Pending remote verification.
+Implementation head `3cb08a17b579373feff175b5d0825741bb002453` passed Governance (`29514650614`), Security/CodeQL (`29514650798`), and Portable Repository Contract (`29514650993`). This metadata-only close reruns the same checks.
