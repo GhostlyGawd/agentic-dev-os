@@ -1,8 +1,8 @@
 # Pilot baseline and truth audit
 
-Snapshot date: 2026-07-16  
-Repository: `GhostlyGawd/agentic-dev-os`  
-Default branch: `main`  
+Snapshot date: 2026-07-16
+Repository: `GhostlyGawd/agentic-dev-os`
+Default branch: `main`
 Audited default SHA: `aef53865f839190c4efa8b335510044c28c66776`
 
 This is an evidence snapshot for a bounded pilot. It does not declare this repository canonical and does not authorize portfolio rollout.
