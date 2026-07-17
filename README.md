@@ -1,141 +1,130 @@
 # Agentic Development Operating System
 
-A governed, traceable, measurable product-delivery system for developers and small teams building software with AI agents. It connects product strategy and discovery to bounded implementation and operational proof.
+A repository-native operating system for developers and small teams using AI agents to build software while preserving product intent, bounded scope, verification, and outcome evidence.
 
 > [!IMPORTANT]
-> **Status: Lab-stage portfolio pilot candidate.** The repository declares source version `1.1.0`, but has no tagged release or package and is not yet the canonical portfolio harness. See the [pilot baseline](docs/pilot/BASELINE.md).
+> **Status: Lab-stage, supported portfolio pilot candidate.** The source declares version `1.1.0`, but there is no tag, release, package, or supported version line. This is **not** the canonical portfolio harness and is not production-proven. Evaluate an immutable commit SHA, not the source-version label.
 
-This project turns product intent into bounded execution:
+**Audience:** AI-native product and engineering teams, platform teams, developer-tool maintainers, and teams with traceability or audit requirements.
 
-```mermaid
-flowchart LR
-    A[Outcome] --> B[Opportunity]
-    B --> C[Validated bet]
-    C --> D[PRD and spec]
-    D --> E[Ticket and code]
-    E --> F[Test and metric]
-    F --> G[Human review]
-```
+**Outcome:** A change can explain why it exists, which scope and risk controls applied, how it was verified, and which outcome it should improve.
 
-It includes working validation, event collection, metric summaries, architecture boundaries, CI gates, templates, and a complete example trace chain. It has no runtime dependencies beyond Python 3.11+.
+![System map showing product intent flowing through a bounded agent loop into traceable evidence](docs/assets/agentic-dev-os-system-map.svg)
 
-## Run from source
+*Documentation diagram for `main@22523bc78b7d65a4a90b9b01d08b681591fc662f`, created 2026-07-17. It explains the implemented repository model; it is not execution proof. Original project asset with no external media.*
 
-Prerequisites: Python 3.11+, Git, and GNU Make on a Unix-like shell.
+## What it provides
+
+- A product chain from measurable outcomes and evidenced opportunities to bets, PRDs, specs, tickets, code, tests, metrics, and human review.
+- Bounded agent loops with explicit file scope, risk tiers, digest-bound approvals, retry limits, and stop conditions.
+- Dependency-free Python validation for traceability, architecture boundaries, generated views, telemetry, and governance contracts.
+- GitHub Actions gates, synthetic observability data, metric summaries, alerts, and a static HTML dashboard.
+- Repository-native Markdown and JSON artifacts that remain readable without a hosted service.
+
+It does not install itself into other repositories, coordinate an entire portfolio, authorize autonomous production work, or replace human product and security judgment.
+
+## Run the current source
+
+Prerequisites: Python 3.11+, Git, GNU Make, and a Unix-like shell.
 
 ```bash
 git clone https://github.com/GhostlyGawd/agentic-dev-os.git
 cd agentic-dev-os
 make verify
+make product
+```
+
+`make verify` compiles and lints the Python source, validates repository contracts, and runs unit, negative-path, architecture, and end-to-end tests. `make product` validates the product-to-delivery chain and confirms generated compatibility views are current.
+
+These commands run in GitHub Actions on Ubuntu with Python 3.11. This is a source verification path, not a package installer or proven cross-repository adoption path. No five-minute claim is made: an unfamiliar-user clean-room setup test is still required.
+
+### Verified terminal evidence
+
+![Rendered terminal capture showing successful make verify and make product output from GitHub Actions](docs/assets/governance-ci-evidence.svg)
+
+*Sanitized static rendering of actual output from [Governance run 29533739580](https://github.com/GhostlyGawd/agentic-dev-os/actions/runs/29533739580) and [Portable Repository Contract run 29533739561](https://github.com/GhostlyGawd/agentic-dev-os/actions/runs/29533739561), both for `22523bc78b7d65a4a90b9b01d08b681591fc662f` on 2026-07-16. The layout is original; command results are copied from those logs.*
+
+For a local synthetic demonstration after verification:
+
+```bash
 make demo
 ```
 
-These commands exercise the repository itself; they are not an installer for another product repository. `make verify` checks all 100 master obligations, the full product and delivery chain, deterministic generated views, artifact contracts, tool naming, ownership, architecture, telemetry, real lint rules, and positive/negative tests. `make demo` exercises a complete loop and generates metrics, alerts, JSON evidence, and a static HTML dashboard.
+The demo writes synthetic loop events, metrics, alerts, and `observability/reports/dashboard.html`. It demonstrates repository machinery, not production use or external adoption.
 
-## Product workflow
+## Governed workflow
 
 1. Orient from `.ai/context/` and `.ai/strategy/`.
-2. Define an `O-NNN` with metric, baseline, target, horizon, and guardrails.
-3. Record an evidenced `OP-NNN` and test assumptions with `EXP-NNN`.
-4. Advance a `BET-NNN` only after success, kill, and advance criteria are explicit.
-5. Create a canonical PRD under `docs/prd/` and a reviewable `M-NNN`.
-6. Execute through specs, tickets, governed loops, tests, metrics, and reviews.
-7. Close or iterate using outcome evidence, findings, and change requests.
-
-The enforced chain is:
+2. Define a measurable outcome and record an evidenced opportunity.
+3. Test assumptions and advance only a bounded bet with success and kill criteria.
+4. Create a canonical PRD, specification, milestone, and ticket.
+5. Start a loop only when scope, risk, verification, and approvals are valid.
+6. Implement within the ticket boundary, verify, and record trace and telemetry evidence.
+7. Close, hand off, or iterate through human outcome review.
 
 `Outcome → Opportunity → Bet → PRD requirement → Spec criterion → Milestone/Ticket → Code → Test → Event → Metric → Review → Completion`
 
-## Daily workflow
+See [Architecture and limitations](docs/ARCHITECTURE.md) for component boundaries, data flow, unsupported cases, and recovery guidance.
 
-1. Copy a template from `docs/*/TEMPLATE.md`.
-2. Confirm the linked outcome, opportunity, bet, and milestone under `.ai/`.
-3. Assign stable delivery IDs: `PRD-NNN`, `SPEC-NNN`, `TICKET-NNN`, `TEST-NNN`, and `METRIC-NNN`.
-4. Add the complete relationship to `docs/trace/traceability.json`.
-5. Run `python scripts/ados.py product export` and `make product`.
-6. Plan and start the loop: `python scripts/ados.py loop plan --ticket TICKET-001`, then `python scripts/ados.py loop start --ticket TICKET-001`.
-7. Make only the ticket's allowed changes.
-8. Record scoped actions and run `python scripts/ados.py loop verify --ticket TICKET-001`.
-9. Finish the loop: `python scripts/ados.py loop stop --ticket TICKET-001 --outcome success`.
-10. Update completion notes, review evidence, and the trace record status.
-
-## Commands
+## Common commands
 
 | Command | Purpose |
 | --- | --- |
-| `make verify` | Run every local governance gate |
+| `make verify` | Run every local governance gate and test |
 | `make product` | Validate the product chain and generated views |
 | `make test` | Run unit and architecture tests |
-| `make validate` | Validate artifacts, traces, scopes, and events |
-| `make demo` | Emit demo events and build a metric report |
-| `python scripts/ados.py new ticket --id TICKET-002 --title "Example"` | Create a ticket and emit its lifecycle event |
-| `python scripts/ados.py metrics` | Rebuild the human-readable metric report |
-| `python scripts/ados.py trace-query --id PRD-001-R08` | Perform forward/backward impact analysis |
-| `python scripts/ados.py scope-check --ticket TICKET-001 FILE...` | Enforce the allowed-file boundary |
-| `python scripts/ados.py approve ...` | Bind an R2/R3 approval to the exact ticket digest |
-| `python scripts/ados.py archive --ticket TICKET-001` | Move completed work out of the active set |
-| `python scripts/ados.py growth record ...` | Record organic funnel progress |
+| `make demo` | Emit synthetic demo events and build metric evidence |
+| `python scripts/ados.py loop plan --ticket TICKET-001` | Produce a ticket's bounded plan |
+| `python scripts/ados.py loop start --ticket TICKET-001` | Start a valid governed loop |
+| `python scripts/ados.py loop verify --ticket TICKET-001` | Run allowlisted ticket verification |
+| `python scripts/ados.py trace-query --id PRD-001-R08` | Perform impact analysis |
+| `python scripts/ados.py scope-check --ticket TICKET-001 FILE...` | Enforce allowed-file scope |
 | `python scripts/ados.py product validate` | Validate strategy-to-delivery ancestry |
-| `python scripts/ados.py product export` | Regenerate non-canonical requirement and CSV views |
-| `python scripts/ados.py product gate --prd PRD-002` | Check whether a PRD may advance into planning |
-| `python scripts/ados.py product metrics` | Report product-chain health |
+| `python scripts/ados.py product export --check` | Check deterministic generated views |
+| `python scripts/ados.py metrics` | Rebuild metrics and the static dashboard |
 
 ## Repository map
 
 | Path | Contract |
 | --- | --- |
-| `.ai/context/` | Project brief, users, language, and constraints |
-| `.ai/strategy/` | North star, outcomes, guardrails, roadmap, and scorecard |
-| `.ai/discovery/` | Evidenced opportunities, assumptions, research, and experiments |
-| `.ai/bets/` | Bounded hypotheses with success and kill criteria |
-| `.ai/milestones/` | Reviewable increments linking bets to PRDs and reviews |
-| `.ai/commands/` | Portable workflow guidance from orientation through closure |
+| `.ai/context/` and `.ai/strategy/` | Context, outcomes, guardrails, and roadmap |
+| `.ai/discovery/`, `.ai/bets/`, `.ai/milestones/` | Evidence, hypotheses, and reviewable increments |
 | `.ai/requirements/` | Generated compatibility views; never edit directly |
-| `docs/prd/` | Product intent and stable requirements |
-| `MASTER.md` | Controlling contract decomposed into 100 verified obligations |
-| `docs/specs/` | Architecture, interfaces, acceptance criteria, tests |
-| `docs/tickets/` | One bounded executable slice per file |
+| `docs/prd/`, `docs/specs/`, `docs/tickets/` | Intent, acceptance, and bounded execution |
 | `docs/trace/` | Machine-readable requirement-to-outcome links |
-| `agent/` | Agent rules, risk policy, and loop contracts |
-| `scripts/ados.py` | Local CLI for validation, loops, metrics, and scaffolding |
-| `observability/` | Event schema, event stream, and dashboard definition |
-| `tests/` | Behavioral and governance tests |
-| `.github/workflows/` | Pull-request enforcement |
+| `agent/` | Agent rules, risk policy, approvals, and loop contracts |
+| `src/agentic_os/` | Validation, governance, metrics, and telemetry library |
+| `scripts/ados.py` | Local command-line interface |
+| `observability/` | Synthetic events, metrics, alerts, and dashboard |
+| `.github/workflows/` | Pull-request, portability, and security enforcement |
 
-## Adoption
+## Adoption boundary
 
-Start in shadow mode: agents propose a ticket plan and file scope, while a human executes or approves it. Move low-risk, reversible work to autonomous execution only after the metrics show reliable first-pass success and low intervention. See [adoption](docs/specs/SPEC-002-adoption.md) and [growth strategy](docs/growth/strategy.md).
+Start in shadow mode: agents propose ticket scope and verification while a human executes or approves the work. Move only low-risk, reversible work toward autonomy after local evidence shows reliable results.
 
-## Pilot evidence and limits
+A reusable harness learning requires product evidence, an acceptance test, validation in two unlike consumers, an explicit version decision, and separately reviewable consumer pull requests. This repository has not completed that round trip. See the [pilot adoption contract](docs/pilot/ADOPTION_CONTRACT.md).
 
-The source snapshot has working validators, tests, synthetic telemetry, a static dashboard, and successful Governance runs. It does **not** yet have:
+## Security and privacy
 
-- a tagged release, published package, or supported version line;
-- an independently verified five-minute setup;
-- a proven cross-repository installer or migration path;
-- production-use evidence;
-- completed secret-scanning, branch-protection, or release gates;
-- a completed product → harness → version → consumer-update learning round trip.
+The Python core has no required runtime dependency or hosted backend. Repository files, tickets, telemetry, and agent-generated instructions remain untrusted input. Do not put credentials, personal data, client data, production data, or private research in artifacts, events, examples, captures, or issues.
 
-The candidate role, security baseline, and decision gates are documented in:
+The source snapshot is not a hardened production boundary. Read [SECURITY.md](SECURITY.md) and [data handling](agent/policies/data-handling.md); report vulnerabilities privately as instructed there.
 
-- [Pilot baseline](docs/pilot/BASELINE.md)
-- [Remediation plan](docs/pilot/REMEDIATION_PLAN.md)
-- [Adoption and learning contract](docs/pilot/ADOPTION_CONTRACT.md)
-- [Portable repository contract](docs/pilot/PORTABLE_REPOSITORY_CONTRACT.md)
-- [Security policy](SECURITY.md)
+## Project status and trust
 
-## Design principles
+- **Version:** source `1.1.0`; no tag, release, package, or stable support line.
+- **Maturity:** Lab; supported pilot candidate; candidate-not-canonical.
+- **License:** MIT. See [LICENSE](LICENSE).
+- **Provenance:** See [Provenance and asset register](docs/PROVENANCE.md).
+- **Contributions:** See [CONTRIBUTING.md](CONTRIBUTING.md).
+- **Support:** See [SUPPORT.md](SUPPORT.md); no response-time SLA is promised.
+- **Evidence assessment:** See [Productization status](docs/productization/STATUS.md).
 
-- Evidence over memory.
-- Product outcomes before implementation commitments.
-- One canonical source for each fact; compatibility views are generated.
-- One objective, one scope, one verification path.
-- Stable IDs and bidirectional traceability.
-- Least privilege and risk-tiered approvals.
-- Outcome metrics alongside throughput metrics.
-- Exceptions are explicit; ambiguous work does not get forced through a narrow loop.
+## Current limitations
 
-## License
-
-MIT. See [LICENSE](LICENSE).
+- No release, package, installer, supported upgrade channel, or migration tool.
+- No independent clean-room or five-minute setup evidence.
+- No production-use evidence or authorization to act as the portfolio-wide standard.
+- Demo, dashboard, and committed metrics are synthetic framework evidence.
+- Two-consumer learning validation and explicit versioning remain incomplete.
+- Platform security and repository-setting gates require separate authorization.
