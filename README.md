@@ -1,9 +1,16 @@
 # Agentic Development Operating System
 
-A repository-native operating system for developers and small teams using AI agents to build software while preserving product intent, bounded scope, verification, and outcome evidence.
+A preserved repository-native governance system for bounded, traceable
+AI-assisted product delivery. Its useful capabilities are evaluated for
+explicit adoption in the canonical
+[Recursive Harness](https://github.com/GhostlyGawd/recursive-harness).
 
 > [!IMPORTANT]
-> **Status: Lab-stage, supported portfolio pilot candidate.** The source declares version `1.1.0`, but there is no tag, release, package, or supported version line. This is **not** the canonical portfolio harness and is not production-proven. Evaluate an immutable commit SHA, not the source-version label.
+> **Status: Superseded on 2026-07-18; maintenance-only historical donor.**
+> Recursive Harness is the canonical multi-agent harness target. This repository
+> remains public and unarchived for provenance, but new reusable harness behavior
+> and provider adapters belong there. The source declares version `1.1.0`, but
+> there is no tag, release, package, or supported version line.
 
 **Audience:** AI-native product and engineering teams, platform teams, developer-tool maintainers, and teams with traceability or audit requirements.
 
@@ -13,7 +20,7 @@ A repository-native operating system for developers and small teams using AI age
 
 *Documentation diagram for `main@22523bc78b7d65a4a90b9b01d08b681591fc662f`, created 2026-07-17. It explains the implemented repository model; it is not execution proof. Original project asset with no external media.*
 
-## What it provides
+## What the preserved source provides
 
 - A product chain from measurable outcomes and evidenced opportunities to bets, PRDs, specs, tickets, code, tests, metrics, and human review.
 - Bounded agent loops with explicit file scope, risk tiers, digest-bound approvals, retry limits, and stop conditions.
@@ -21,9 +28,12 @@ A repository-native operating system for developers and small teams using AI age
 - GitHub Actions gates, synthetic observability data, metric summaries, alerts, and a static HTML dashboard.
 - Repository-native Markdown and JSON artifacts that remain readable without a hosted service.
 
-It does not install itself into other repositories, coordinate an entire portfolio, authorize autonomous production work, or replace human product and security judgment.
+It does not install itself into other repositories, coordinate an entire
+portfolio, authorize autonomous production work, or replace human product and
+security judgment. It is no longer an active candidate or destination for new
+shared capabilities.
 
-## Run the current source
+## Verify the preserved source
 
 Prerequisites: Python 3.11+, Git, GNU Make, and a Unix-like shell.
 
@@ -98,11 +108,17 @@ See [Architecture and limitations](docs/ARCHITECTURE.md) for component boundarie
 | `observability/` | Synthetic events, metrics, alerts, and dashboard |
 | `.github/workflows/` | Pull-request, portability, and security enforcement |
 
-## Adoption boundary
+## Donor boundary
 
-Start in shadow mode: agents propose ticket scope and verification while a human executes or approves the work. Move only low-risk, reversible work toward autonomy after local evidence shows reliable results.
+The original adoption and shadow-mode contracts remain in the pilot documents
+as historical design evidence. New adoption, packaging, and portability work
+belongs in Recursive Harness.
 
-A reusable harness learning requires product evidence, an acceptance test, validation in two unlike consumers, an explicit version decision, and separately reviewable consumer pull requests. This repository has not completed that round trip. See the [pilot adoption contract](docs/pilot/ADOPTION_CONTRACT.md).
+A donor capability is adopted only after Recursive Harness classifies it,
+defines acceptance evidence, and validates any portability claim through an
+explicit provider adapter or product consumer. Do not copy a capability from
+this repository directly into consumers. See Recursive's
+[consolidation map](https://github.com/GhostlyGawd/recursive-harness/blob/main/docs/comparisons/agentic-dev-os.md).
 
 ## Security and privacy
 
@@ -113,18 +129,20 @@ The source snapshot is not a hardened production boundary. Read [SECURITY.md](SE
 ## Project status and trust
 
 - **Version:** source `1.1.0`; no tag, release, package, or stable support line.
-- **Maturity:** Lab; supported pilot candidate; candidate-not-canonical.
+- **Maturity:** Lab; superseded; maintenance-only governance donor.
+- **Successor:** [Recursive Harness](https://github.com/GhostlyGawd/recursive-harness).
+- **Support:** Maintenance-only historical reference; no feature roadmap or response-time SLA. Security reports follow [SECURITY.md](SECURITY.md).
 - **License:** MIT. See [LICENSE](LICENSE).
 - **Provenance:** See [Provenance and asset register](docs/PROVENANCE.md).
 - **Contributions:** See [CONTRIBUTING.md](CONTRIBUTING.md).
-- **Support:** See [SUPPORT.md](SUPPORT.md); no response-time SLA is promised.
+- **Prior support contract:** See [SUPPORT.md](SUPPORT.md); no response-time SLA is promised.
 - **Evidence assessment:** See [Productization status](docs/productization/STATUS.md).
 
 ## Current limitations
 
 - No release, package, installer, supported upgrade channel, or migration tool.
 - No independent clean-room or five-minute setup evidence.
-- No production-use evidence or authorization to act as the portfolio-wide standard.
+- No production-use evidence; this repository is superseded and is not the portfolio-wide standard.
 - Demo, dashboard, and committed metrics are synthetic framework evidence.
-- Two-consumer learning validation and explicit versioning remain incomplete.
+- New capability validation, provider adapters, and explicit versioning are owned by Recursive Harness.
 - Platform security and repository-setting gates require separate authorization.

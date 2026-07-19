@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "repository": "GhostlyGawd/agentic-dev-os",
-  "purpose": "Candidate versioned harness for governed agent-assisted product delivery",
+  "purpose": "Historical governance reference and capability donor to Recursive Harness",
   "family": "agentic-development-harness",
-  "lifecycle": "active",
+  "lifecycle": "superseded",
   "maturity": "lab",
-  "investment": "supported",
-  "disposition": "public-product",
-  "visibility_intent": "remain-public",
+  "investment": "maintenance-only",
+  "disposition": "archive",
+  "visibility_intent": "remain-public-as-historical-reference",
   "owner": "GhostlyGawd",
   "lineage": [
     "agentic-system",
@@ -15,7 +15,7 @@
     "agentic-engineering-max"
   ],
   "data_classification": "public",
-  "capability_role": "candidate-not-canonical",
+  "capability_role": "governance-donor-to-recursive-harness",
   "portfolio_standard_ref": "GhostlyGawd/repo-audit@930bf61a6c8daf48098c7447fd44c7ec7ce27f29",
   "harness_ref": "self@1690ec0f10a3a523532df628414fab8281efbd9f"
 }
