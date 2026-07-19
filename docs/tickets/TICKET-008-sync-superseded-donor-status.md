@@ -46,7 +46,7 @@ security boundaries, and live GitHub settings.
   evidence without presenting it as current product support.
 - [x] No source behavior, release, live archive state, visibility, settings,
   historical receipt, or security boundary changes.
-- [ ] `make verify` and `make product` pass.
+- [x] `make verify` and `make product` pass in the supported Ubuntu workflow.
 
 ## Verification
 - `make verify`
@@ -64,4 +64,10 @@ The repository becomes unambiguous to agents and people: it is useful donor
 evidence, while Recursive Harness owns future reusable harness development.
 
 ## Completion Notes
-Pending local and protected pull-request verification.
+The local profile matches the merged registry. Local text lint, product-chain
+validation, and ticket-scope validation passed. This Windows host lacks GNU
+Make and Bash; direct Python execution exposed pre-existing Windows path and
+generated-view incompatibilities outside this documentation ticket. On the
+supported Ubuntu runner, PR #18 passed Governance `verify` (including both Make
+targets), the portable contract, and CodeQL. No live repository setting or
+runtime behavior changed.
