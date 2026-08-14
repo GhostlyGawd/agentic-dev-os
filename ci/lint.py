@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 issues=[]
 for path in ROOT.rglob("*"):
-    if not path.is_file() or any(part in {".git","__pycache__",".venv"} for part in path.parts): continue
+    if not path.is_file() or any(part in {".git","__pycache__",".venv","node_modules","dist","coverage","data"} for part in path.parts): continue
     if path.suffix not in {".py",".md",".json",".yml",".yaml",".toml"} and path.name not in {"Makefile",".gitignore"}: continue
     try: lines=path.read_text(encoding="utf-8").splitlines()
     except UnicodeDecodeError: continue
