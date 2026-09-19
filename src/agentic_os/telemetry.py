@@ -58,6 +58,16 @@ def validate_event(event: dict[str, Any]) -> None:
     for key in ("duration_ms", "retry_count", "cost_usd", "tests_passed", "tests_failed", "architecture_violations"):
         if key in event and (not isinstance(event[key], (int, float)) or event[key] < 0):
             raise ValueError(f"{key} must be a non-negative number")
+    if "human_intervention" in event and not isinstance(event["human_intervention"], bool):
+        raise ValueError("human_intervention must be boolean")
+    if "regression" in event and not isinstance(event["regression"], bool):
+        raise ValueError("regression must be boolean")
+    if "metadata" in event and not isinstance(event["metadata"], dict):
+        raise ValueError("metadata must be an object")
+    allowed_keys = required | {"outcome", "duration_ms", "retry_count", "cost_usd", "human_intervention", "regression", "tests_passed", "tests_failed", "architecture_violations", "metadata"}
+    unknown = set(event.keys()) - allowed_keys
+    if unknown:
+        raise ValueError(f"unknown fields: {', '.join(sorted(unknown))}")
     if _sanitize(event) != event:
         raise ValueError("event contains sensitive metadata keys")
 
