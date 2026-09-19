@@ -4,7 +4,7 @@
 - Owner: Founder (GhostlyGawd)
 - Implementer: Claude
 - Risk: R1
-- Status: In Review
+- Status: Complete (content landed on base branch; originating PR #27 closed unmerged)
 - Branch: `claude/report-status-ul2edz`
 
 ## Linked PRD
@@ -49,4 +49,4 @@ Maintenance-only documentation and one guarded lint change, consistent with this
 Covered by the dogfood issue #5 thread; the founder's standing authorization of 2026-08-14 covers the merge.
 
 ## Completion Notes
-Delivered on `claude/report-status-ul2edz`; pending merge.
+Delivered on `claude/report-status-ul2edz`. PR #27 for that branch was closed without merging (verified via the GitHub API: `merged=false`, `state=closed`). The ticket's file changes (`ci/lint.py` exclusion set, `docs/findings/FINDING-002-ts-repo-adaptation-frictions.md`, `.ai/strategy/roadmap.md`) are nonetheless already present on the current base branch, landed via a separate commit, so the acceptance criteria remain satisfied despite PR #27 not being the merge vehicle.
