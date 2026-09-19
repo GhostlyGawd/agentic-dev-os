@@ -18,7 +18,7 @@ A dependency-free CLI validates governed artifacts, writes structured events, ag
 - `ados.py loop retry --ticket ID --reason TEXT`
 - `ados.py loop stop --ticket ID --outcome OUTCOME`
 - `ados.py metrics`
-- `ados.py new ticket --id ID --title TITLE`
+- `ados.py new [prd|spec|ticket] --id ID --title TITLE`
 - `ados.py product validate|export|metrics|gate`
 - `ados.py demo`
 
