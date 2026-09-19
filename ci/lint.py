@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+import os
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(os.environ.get("LINT_ROOT") or Path(__file__).resolve().parents[1])
 issues=[]
 for path in ROOT.rglob("*"):
     if not path.is_file() or any(part in {".git","__pycache__",".venv","node_modules","dist","coverage","data"} for part in path.parts): continue
