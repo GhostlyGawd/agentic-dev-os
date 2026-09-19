@@ -1,4 +1,4 @@
-# Growth Templates Audit — 2026-09-19
+# FINDING-003 — Growth templates are stub scaffolds, not copy-ready assets
 
 ## Finding
 
