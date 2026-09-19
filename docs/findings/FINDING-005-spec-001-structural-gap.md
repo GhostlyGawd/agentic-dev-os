@@ -1,4 +1,4 @@
-# Spec Structural Consistency Analysis
+# FINDING-005 — SPEC-001 missing structural sections present in TEMPLATE and SPEC-003
 
 ## Files Checked
 - docs/specs/SPEC-001-governance-runtime.md
