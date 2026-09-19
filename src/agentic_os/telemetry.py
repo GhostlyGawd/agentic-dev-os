@@ -57,7 +57,7 @@ def validate_event(event: dict[str, Any]) -> None:
         raise ValueError("unsupported outcome")
     for key in ("duration_ms", "retry_count", "cost_usd", "tests_passed", "tests_failed", "architecture_violations"):
         if key in event and (not isinstance(event[key], (int, float)) or event[key] < 0):
-            raise ValueError(f"{key} must be non-negative")
+            raise ValueError(f"{key} must be a non-negative number")
     if _sanitize(event) != event:
         raise ValueError("event contains sensitive metadata keys")
 
