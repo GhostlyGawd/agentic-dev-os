@@ -63,6 +63,7 @@ Repository scaffolding, local CLI, validation, tests, CI, telemetry, and documen
 - architecture.json
 - agent/
 - ci/
+- docs/decisions/ADR-001-json-canonical-data.md
 - docs/
 - observability/
 - scripts/
@@ -72,6 +73,7 @@ Repository scaffolding, local CLI, validation, tests, CI, telemetry, and documen
 - .github/
 
 ## Steps
+- Record ADR-001 (use JSON for canonical governance data).
 - Define the master compliance contract.
 - Implement governance, observability, growth, and maintenance controls.
 - Prove positive, negative, and end-to-end paths.
