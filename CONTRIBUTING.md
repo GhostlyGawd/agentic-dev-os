@@ -6,7 +6,8 @@ New product work must also link a measurable outcome, evidenced opportunity, val
 
 ## Pull request contract
 
-- Link the ticket and requirement IDs.
+- Include a `TICKET-NNN` reference in the PR body (required by ci/validate_pr_scope.py).
+- Link the requirement IDs.
 - Link the outcome, opportunity, bet, and milestone IDs.
 - Explain the user outcome, not only the implementation.
 - Include tests or explain why the change is documentation-only.
