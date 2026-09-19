@@ -4,6 +4,8 @@
 - Owner: <name/team>
 - Risk: R1
 - Status: Ready
+- Implementer: <name> (optional)
+- Branch: <branch-name> (optional)
 
 ## Linked PRD
 - PRD-NNN-R01
