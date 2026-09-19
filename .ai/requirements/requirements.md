@@ -19,6 +19,7 @@
 - PRD-001-R16: Implement organic growth strategy, experiments, conversion measurement, and reusable assets. (source: `docs/prd/PRD-001-agentic-development-os.md`)
 - PRD-001-R17: Map every master line item to implementation and test evidence. (source: `docs/prd/PRD-001-agentic-development-os.md`)
 - PRD-001-R18: Prove success with positive, negative, and end-to-end automated verification. (source: `docs/prd/PRD-001-agentic-development-os.md`)
+- PRD-001-R19: Execute ticket verification as allowlisted argv lists without shell execution. (source: `docs/prd/PRD-001-agentic-development-os.md`)
 - PRD-002-R01: Provide context, north-star, product brief, PR/FAQ, outcomes, guardrails, roadmap, and scorecard artifacts. (source: `docs/prd/PRD-002-product-strategy-integration.md`)
 - PRD-002-R02: Provide evidenced opportunities, customer problems, assumptions, research, and experiments. (source: `docs/prd/PRD-002-product-strategy-integration.md`)
 - PRD-002-R03: Require bets to link outcomes and opportunities and define success, kill, and advance criteria. (source: `docs/prd/PRD-002-product-strategy-integration.md`)

@@ -45,6 +45,7 @@ Autonomous production operation, vendor-specific publishing, or replacement of p
 - PRD-001-R16: Implement organic growth strategy, experiments, conversion measurement, and reusable assets.
 - PRD-001-R17: Map every master line item to implementation and test evidence.
 - PRD-001-R18: Prove success with positive, negative, and end-to-end automated verification.
+- PRD-001-R19: Execute ticket verification as allowlisted argv lists without shell execution.
 
 ## Success Metrics
 - METRIC-001 through METRIC-015 meet thresholds defined in `docs/metrics/catalog.md`.
