@@ -1,4 +1,4 @@
-# ADR-002 Allowlist Drift Check — 2026-09-19
+# FINDING-004 — Completed tickets document non-allowlisted verification commands
 
 ## Finding
 
