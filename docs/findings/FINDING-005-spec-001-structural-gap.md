@@ -1,0 +1,72 @@
+# FINDING-005 — SPEC-001 missing structural sections present in TEMPLATE and SPEC-003
+
+## Files Checked
+- docs/specs/SPEC-001-governance-runtime.md
+- docs/specs/SPEC-002-adoption.md
+- docs/specs/SPEC-003-product-strategy-integration.md
+- docs/specs/TEMPLATE.md
+
+## Canonical Template Structure
+1. Metadata
+2. Summary
+3. Architecture
+4. Public Interfaces
+5. Data Model
+6. Workflow
+7. Edge Cases
+8. Security and Privacy
+9. Non-Goals
+10. Acceptance Criteria
+11. Test Plan
+12. Telemetry
+13. Rollout and Rollback
+14. Traceability
+
+## Results
+
+### SPEC-003 Structure
+**Status:** MATCHES TEMPLATE EXACTLY ✓
+
+### SPEC-001 Structure
+**Status:** MISSING SECTIONS
+
+Sections present:
+- Metadata
+- Summary
+- Architecture
+- Public Interfaces
+- Data Model
+- Acceptance Criteria
+- Test Plan
+- Telemetry
+- Rollout and Rollback
+- Traceability
+
+Sections missing:
+- Workflow
+- Edge Cases
+- Security and Privacy
+- Non-Goals
+
+### SPEC-002 Structure
+**Status:** DELIBERATELY DIFFERENT (justified by scope)
+
+Structure: Metadata, Stages, Graduation gates, Rollback
+
+Rationale: Spec-002 covers adoption phases and graduation criteria, not implementation details. Different sectioning is appropriate for phased rollout documentation.
+
+## Finding
+
+SPEC-001 has genuine structural inconsistency. Both SPEC-001 and SPEC-003 are substantial system implementation specs targeting code and runtime behavior. SPEC-001 is missing 4 key sections that are defined in the canonical TEMPLATE and present in SPEC-003.
+
+Missing sections are significant for an implementation spec:
+- **Workflow**: How the system operates
+- **Edge Cases**: Boundary conditions and error handling
+- **Security and Privacy**: Critical for a governance runtime
+- **Non-Goals**: Clarifies scope constraints
+
+Associated ticket (from traceability): **TICKET-001**
+
+## Recommendation
+
+SPEC-001 should be updated to include the missing sections to match the template structure and maintain consistency with SPEC-003. This aligns with MASTER.md requirement for structured specification artifacts.
