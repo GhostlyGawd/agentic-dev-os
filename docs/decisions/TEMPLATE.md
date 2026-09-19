@@ -1,16 +1,10 @@
 # ADR-NNN: <Decision>
 
 - Status: Proposed
-- Owner:
 - Date:
-- Expiry:
-- Risk:
-- Approval:
 
-## Context
 ## Decision
-## Alternatives
+
+## Rationale
+
 ## Consequences
-## Rollback
-## User Outcome Validation
-## Follow-Up Guardrail
