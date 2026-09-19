@@ -1,13 +1,15 @@
 """TEST-003 TEST-004 TEST-006 TEST-007 TEST-011 TEST-029 TEST-030; MASTER-TEST-002 MASTER-TEST-008 MASTER-TEST-009."""
 import json
 import os
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
 import sys
+import subprocess
 
 ROOT=Path(__file__).resolve().parents[1]; sys.path.insert(0,str(ROOT/"src")); sys.path.insert(0,str(ROOT/"tests"))
-from agentic_os.governance import LoopManager,approval_valid,archive_ticket,check_scope,grant_approval,verification_argv
+from agentic_os.governance import LoopManager,approval_valid,archive_ticket,check_scope,changed_files,grant_approval,verification_argv
 from agentic_os.validation import stale_artifacts
 from helpers import copy_repo,ready_ticket
 
@@ -53,6 +55,46 @@ class GovernanceTests(unittest.TestCase):
                 ticket.write_text(ticket.read_text(encoding="utf-8").replace("- `make verify`\n- `make demo`",f"- `{program}`"),encoding="utf-8")
                 manager=LoopManager(root); manager.start("TICKET-001","agent")
                 self.assertEqual(expected,manager.verify("TICKET-001","agent"))
+
+    def test_changed_files_returns_empty_list_when_no_changes(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=copy_repo(Path(d))
+            subprocess.run(["git","init"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","config","user.email","test@example.com"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","config","user.name","Test User"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","add","."],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","commit","-m","init"],cwd=root,check=True,capture_output=True)
+            result=changed_files(root,"HEAD"); self.assertEqual([],result)
+
+    def test_changed_files_detects_modified_files(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=copy_repo(Path(d))
+            subprocess.run(["git","init"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","config","user.email","test@example.com"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","config","user.name","Test User"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","add","."],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","commit","-m","init"],cwd=root,check=True,capture_output=True)
+            readme_path=root/"README.md"; original_text=readme_path.read_text(encoding="utf-8")
+            readme_path.write_text(original_text+"\ntest change\n",encoding="utf-8")
+            result=changed_files(root,"HEAD")
+            self.assertIn("README.md",result)
+
+    def test_changed_files_filters_empty_lines(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=copy_repo(Path(d))
+            subprocess.run(["git","init"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","config","user.email","test@example.com"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","config","user.name","Test User"],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","add","."],cwd=root,check=True,capture_output=True)
+            subprocess.run(["git","commit","-m","init"],cwd=root,check=True,capture_output=True)
+            result=changed_files(root,"HEAD")
+            self.assertNotIn("",result,"changed_files should filter empty lines")
+
+    def test_changed_files_handles_git_error_gracefully(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d)/"not_a_repo"; root.mkdir()
+            result=changed_files(root,"HEAD")
+            self.assertEqual([],result,"git error should return empty list without raising")
 
     def test_archive_and_stale_audit(self):
         with tempfile.TemporaryDirectory() as d:
