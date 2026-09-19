@@ -2,7 +2,6 @@
 
 ## Metadata
 - Owner: Founder (GhostlyGawd)
-- Implementer: Claude
 - Risk: R1
 - Status: Complete (content landed on base branch; originating PR #27 closed unmerged)
 - Branch: `claude/report-status-ul2edz`
