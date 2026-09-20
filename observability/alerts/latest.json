@@ -1,3 +1,20 @@
 {
-  "alerts": []
+  "alerts": [
+    {
+      "metric": "first_pass_success_rate",
+      "rule": {
+        "minimum": 0.8
+      },
+      "severity": "warning",
+      "value": 0.0
+    },
+    {
+      "metric": "event_completeness_rate",
+      "rule": {
+        "minimum": 0.95
+      },
+      "severity": "warning",
+      "value": 0.0
+    }
+  ]
 }
